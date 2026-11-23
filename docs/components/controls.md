@@ -65,7 +65,7 @@ The controls below use local reactive state; change the keyword or status and ap
 
 ## Form-aware controls
 
-`Input`, `Select`, `AutoComplete`, `RangePicker`, `TimePicker`, and related fields can be rendered by `CustomFormItem`, `FormPage`, or `SearchForm`. In that mode, the schema owns the field name and the component receives the form bridge internally:
+`Input`, `Select`, `AutoComplete`, `RangePicker`, `TimePicker`, `Cascader`, `Rate`, `Slider`, `Mentions`, `Transfer`, `Upload`, and related fields can be rendered by `CustomFormItem`, `FormPage`, or `SearchForm`. In that mode, the schema owns the field name and the component receives the form bridge internally:
 
 ```ts
 const columns: ColumnForFormItemType[] = [
@@ -82,7 +82,18 @@ const columns: ColumnForFormItemType[] = [
 ]
 ```
 
-Do not pass a second `v-model` to a schema-managed field. For field rules, slots, and events, use the [schema forms reference](/components/forms).
+The schema types added for full form-control parity are:
+
+| Schema `type` | Alias | Bound value key in `formData` | Native update event |
+| --- | --- | --- | --- |
+| `cascader` | `x-cascader` | `value` | `update:value` |
+| `rate` | `x-rate` | `value` | `update:value` |
+| `slider` | `x-slider` | `value` | `update:value` |
+| `mentions` | `x-mentions` | `value` | `update:value` |
+| `transfer` | `x-transfer` | `targetKeys` | `update:targetKeys` |
+| `upload` | `x-upload` | `fileList` | `update:fileList` |
+
+The Element-parity aliases `autocomplete`, `date-picker`, `range-picker`, `time-picker`, `time-range-picker`, `checkbox`, `checkbox-group`, `switch`, `tree-select`, `select`, `input`, `textarea`, and `input-number` are also resolved. Do not pass a second `v-model` to a schema-managed field. For field rules, slots, and events, use the [schema forms reference](/components/forms).
 
 ## Contract boundaries
 

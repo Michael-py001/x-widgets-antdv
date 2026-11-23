@@ -1,5 +1,7 @@
 # x-widgets-antdv
 
+[![CI](https://github.com/Michael-py001/x-widgets-antdv/actions/workflows/ci.yml/badge.svg)](https://github.com/Michael-py001/x-widgets-antdv/actions/workflows/ci.yml) [![Docs](https://img.shields.io/badge/docs-online-blue.svg)](https://michael-py001.github.io/x-widgets-antdv/) [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
+
 Vue 3 component library built on Ant Design Vue 4. Component names and APIs follow the wrapped Ant Design Vue controls where possible; custom widgets provide schema-driven forms, tables, dialogs, and related page workflows.
 
 ## Requirements
@@ -41,7 +43,7 @@ The plugin registers exported components that provide an `install` method. Compo
 
 ## Documentation
 
-The English and Chinese VitePress site source is in `docs/`. Run `npm run docs:dev` to view it locally or `npm run docs:build` to build the static site. The `Deploy documentation` workflow publishes the site to GitHub Pages on pushes to `main` and via manual dispatch. In the repository's **Settings → Pages**, select **GitHub Actions** as the build and deployment source. Repository contributors can also use `.agents/skills/x-widgets-antdv/SKILL.md` with coding agents.
+The English and Chinese documentation is published at https://michael-py001.github.io/x-widgets-antdv/ (source in `docs/`). Run `npm run docs:dev` to view it locally or `npm run docs:build` to build the static site. The `Deploy documentation` workflow publishes the site to GitHub Pages on pushes to `main` and via manual dispatch; Pages must use **GitHub Actions** as its build and deployment source. Repository contributors can also use `.agents/skills/x-widgets-antdv/SKILL.md` with coding agents.
 
 ## Development
 

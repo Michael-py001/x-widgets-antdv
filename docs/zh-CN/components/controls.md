@@ -64,7 +64,7 @@ const statusOptions = [
 
 ## 表单适配控件
 
-`Input`、`Select`、`AutoComplete`、`RangePicker`、`TimePicker` 等字段可以由 `CustomFormItem`、`FormPage` 或 `SearchForm` 渲染。此时字段名由 Schema 管理，组件内部接收表单桥接：
+`Input`、`Select`、`AutoComplete`、`RangePicker`、`TimePicker`、`Cascader`、`Rate`、`Slider`、`Mentions`、`Transfer`、`Upload` 等字段可以由 `CustomFormItem`、`FormPage` 或 `SearchForm` 渲染。此时字段名由 Schema 管理，组件内部接收表单桥接：
 
 ```ts
 const columns: ColumnForFormItemType[] = [
@@ -81,7 +81,18 @@ const columns: ColumnForFormItemType[] = [
 ]
 ```
 
-Schema 管理的字段不要再传第二个 `v-model`。字段规则、插槽和事件请查看[表单 Schema 参考](/zh-CN/components/forms)。
+为补齐表单控件对等能力而新增的 schema `type` 如下：
+
+| Schema `type` | 别名 | `formData` 中绑定的值字段 | 原生更新事件 |
+| --- | --- | --- | --- |
+| `cascader` | `x-cascader` | `value` | `update:value` |
+| `rate` | `x-rate` | `value` | `update:value` |
+| `slider` | `x-slider` | `value` | `update:value` |
+| `mentions` | `x-mentions` | `value` | `update:value` |
+| `transfer` | `x-transfer` | `targetKeys` | `update:targetKeys` |
+| `upload` | `x-upload` | `fileList` | `update:fileList` |
+
+与 Element 包对齐的别名 `autocomplete`、`date-picker`、`range-picker`、`time-picker`、`time-range-picker`、`checkbox`、`checkbox-group`、`switch`、`tree-select`、`select`、`input`、`textarea` 和 `input-number` 也可以解析。Schema 管理的字段不要再传第二个 `v-model`。字段规则、插槽和事件请查看[表单 Schema 参考](/zh-CN/components/forms)。
 
 ## 契约边界
 

@@ -52,7 +52,7 @@ Emits `search(values)`, `reset(values)`, and `expand(isExpanded)`. The component
 | --- | --- |
 | `name` | Key or key path in `formData`. |
 | `label` | Visible field label. |
-| `el` / `type` | Control kind selected by the FormItem widget map. Common values include `text`, `select`, `textarea`, `input-number`, `input`, `time-picker`, `date-picker`, `time-range-picker`, `checkbox-group`, `radio-group`, `city-picker`, `tree-select`, `input-password`, `input-search`, `range-picker`, `checkbox`, `switch`, `auto-complete`, `area-picker`, and `range-input`; the `x-` aliases remain accepted for legacy schemas. |
+| `el` / `type` | Control kind selected by the FormItem widget map. Common values include `text`, `select`, `textarea`, `input-number`, `input`, `time-picker`, `date-picker`, `time-range-picker`, `checkbox-group`, `radio-group`, `city-picker`, `tree-select`, `input-password`, `input-search`, `range-picker`, `checkbox`, `switch`, `auto-complete`, `area-picker`, and `range-input`, plus the form-aware controls `cascader`, `rate`, `slider`, `mentions`, `transfer`, and `upload`; the `x-` aliases (for example `x-cascader`) remain accepted for legacy schemas, as do `autocomplete`, `date-picker`, `range-picker`, `time-picker`, `time-range-picker`, `checkbox`, `checkbox-group`, `switch`, `tree-select`, `select`, `input`, `textarea`, and `input-number` for parity with the Element library. |
 | `props` | Props forwarded to the selected input control. |
 | `options` | Select/radio/checkbox choices; option records normally contain `label` and `value`. |
 | `rules` | Ant Design Vue validation rules. |
@@ -62,6 +62,10 @@ Emits `search(values)`, `reset(values)`, and `expand(isExpanded)`. The component
 | `beforeSlot`, `afterSlot`, `formSlot` | Parent slot names or render callbacks returning Vue `VNodeChild`; callbacks receive `{ item, formData, name, label }`. |
 | `disabled`, `hideRequiredMark`, `addRequiredMark` | Per-field disabled / required-mark behavior. |
 | `beforeText`, `afterText`, `textValue`, `unitStyle` | Display text and layout helpers. |
+
+### Form-aware control values
+
+The form-aware controls write their current value back into `formData[name]` using their native update event, so do not add a second `v-model`. Most use `value` (`cascader`, `rate`, `slider`, `mentions`), while `transfer` binds `formData[name]` to `targetKeys` and `upload` binds it to `fileList`. Pass Ant Design Vue props through `props` / `slotProps` and events through `event`.
 
 Use slots for genuinely custom UI; use schema options and control props for ordinary fields. For the complete TS surface, import `ColumnForFormItemType` and let TypeScript validate each field.
 

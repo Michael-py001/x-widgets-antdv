@@ -14,6 +14,8 @@ The package re-exports these controls and selected subcomponents from `ant-desig
 
 `Table` is the Ant Design Vue table wrapper. Its `TableProps` type is also exported. The package also exports `ColumnForFormItemType`, `FormBlockSlotRender`, `FormBlockSlotRenderContext`, `FormItemSlotRender`, `FormItemSlotRenderContext`, `SearchFormProps`, `FunctionButtonProps`, and `FunctionButtonOptionsType`.
 
+The schema-driven form also accepts `cascader`, `rate`, `slider`, `mentions`, `transfer`, and `upload` as `el` / `type` values (with `x-` aliases), alongside the existing controls and Element-parity aliases. See [schema forms](/components/forms) and [controls](/components/controls) for the value-binding details.
+
 ## Root utility exports
 
 The package root also exports `setFormdata(formData, name, value)` and `getValue(formData, name)` for reading and writing schema-bound values, plus the `FormFieldName` type (`string | [string, string]`). These are exported from `x-widgets-antdv`; the two-element form targets a nested property one level deep.
@@ -36,6 +38,6 @@ import type { ColumnForFormItemType, SearchFormProps, TableProps } from 'x-widge
 
 ## What the name means
 
-A name matching an Ant Design Vue control is not guaranteed to be a byte-for-byte alias: form-aware wrappers such as `Input`, `Select`, `AutoComplete`, `RangePicker`, and `TimePicker` bridge values into `CustomFormItem` and may add package-specific props. Use upstream Ant Design Vue documentation for upstream behavior and this library's typed exports for wrapper extensions. In particular, custom `Select` modes such as `single` / `multiple-enhance` are wrapper conventions, not Ant Design Vue modes.
+A name matching an Ant Design Vue control is not guaranteed to be a byte-for-byte alias: form-aware wrappers such as `Input`, `Select`, `AutoComplete`, `RangePicker`, `TimePicker`, `Cascader`, `Rate`, `Slider`, `Mentions`, `Transfer`, and `Upload` bridge values into `CustomFormItem` and may add package-specific props. Use upstream Ant Design Vue documentation for upstream behavior and this library's typed exports for wrapper extensions. In particular, custom `Select` modes such as `single` / `multiple-enhance` are wrapper conventions, not Ant Design Vue modes.
 
 See [controls](/components/controls), [schema forms](/components/forms), [table](/components/table), and [cross-library compatibility](/components/compatibility) for the custom API contracts.

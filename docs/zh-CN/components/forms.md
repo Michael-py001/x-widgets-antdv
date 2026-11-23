@@ -52,7 +52,7 @@ function search(values: typeof filters) {
 | --- | --- |
 | `name` | `formData` 中的键或键路径。 |
 | `label` | 字段的可见标签。 |
-| `el` / `type` | 由 FormItem widget map 选择控件。常用值包括 `text`、`select`、`textarea`、`input-number`、`input`、`time-picker`、`date-picker`、`time-range-picker`、`checkbox-group`、`radio-group`、`city-picker`、`tree-select`、`input-password`、`input-search`、`range-picker`、`checkbox`、`switch`、`auto-complete`、`area-picker` 和 `range-input`；仍接受旧 schema 中的 `x-` 别名。 |
+| `el` / `type` | 由 FormItem widget map 选择控件。常用值包括 `text`、`select`、`textarea`、`input-number`、`input`、`time-picker`、`date-picker`、`time-range-picker`、`checkbox-group`、`radio-group`、`city-picker`、`tree-select`、`input-password`、`input-search`、`range-picker`、`checkbox`、`switch`、`auto-complete`、`area-picker`、`range-input`，以及支持表单桥接的 `cascader`、`rate`、`slider`、`mentions`、`transfer`、`upload`；仍接受旧 schema 中的 `x-` 别名（如 `x-cascader`），同时为与 Element 包保持一致还接受 `autocomplete`、`date-picker`、`range-picker`、`time-picker`、`time-range-picker`、`checkbox`、`checkbox-group`、`switch`、`tree-select`、`select`、`input`、`textarea` 和 `input-number`。 |
 | `props` | 转发给所选输入控件的 props。 |
 | `options` | 下拉/单选/复选项；选项对象通常包含 `label` 与 `value`。 |
 | `rules` | Ant Design Vue 校验规则。 |
@@ -62,6 +62,10 @@ function search(values: typeof filters) {
 | `beforeSlot`、`afterSlot`、`formSlot` | 父组件插槽名，或返回 Vue `VNodeChild` 的渲染回调；回调接收 `{ item, formData, name, label }`。 |
 | `disabled`、`hideRequiredMark`、`addRequiredMark` | 单个字段的禁用 / 必填标记行为。 |
 | `beforeText`、`afterText`、`textValue`、`unitStyle` | 显示文本与布局辅助项。 |
+
+### 表单适配控件的值
+
+表单适配控件会通过自身的更新事件把当前值写回 `formData[name]`，不要再额外传 `v-model`。大多数控件使用 `value`（`cascader`、`rate`、`slider`、`mentions`），而 `transfer` 将 `formData[name]` 绑定到 `targetKeys`，`upload` 绑定到 `fileList`。Ant Design Vue 的 props 通过 `props` / `slotProps` 传入，事件通过 `event` 传入。
 
 真正自定义的 UI 才使用插槽；普通字段使用 schema 选项与控件 props 即可。若要查看完整的 TS 接口，请导入 `ColumnForFormItemType`，让 TypeScript 校验每个字段。
 

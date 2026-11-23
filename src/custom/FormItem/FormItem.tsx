@@ -15,6 +15,12 @@ import InputPassword from '../../antdv/Input/BasicInputPassword'
 import Input from '../../antdv/Input/BasicInput'
 import InputSearch from '../../antdv/Input/BasicInputSearch'
 import AutoComplete from '../../antdv/AutoComplete/BasicAutoComplete'
+import Cascader from '../../antdv/Cascader/BasicCascader'
+import Rate from '../../antdv/Rate/BasicRate'
+import Slider from '../../antdv/Slider/BasicSlider'
+import Mentions from '../../antdv/Mentions/BasicMentions'
+import Transfer from '../../antdv/Transfer/BasicTransfer'
+import Upload from '../../antdv/Upload/BasicUpload'
 import TimePicker from '../../antdv/TimePicker/BasicTimePicker'
 import DatePicker from '../../antdv/DatePicker/BasicDatePicker'
 import TimeRangePicker from '../../antdv/TimeRangePicker/BasicTimeRangePicker'
@@ -129,6 +135,20 @@ const FormItemComponent = defineComponent<CustomFormItemProps>({
             switch: Switch,
             'x-auto-complete': AutoComplete,
             'auto-complete': AutoComplete,
+            // Element 包使用 autocomplete 别名，AntD 包同时接受该写法
+            autocomplete: AutoComplete,
+            'x-cascader': Cascader,
+            cascader: Cascader,
+            'x-rate': Rate,
+            rate: Rate,
+            'x-slider': Slider,
+            slider: Slider,
+            'x-mentions': Mentions,
+            mentions: Mentions,
+            'x-transfer': Transfer,
+            transfer: Transfer,
+            'x-upload': Upload,
+            upload: Upload,
             'range-input': RangeInput,
         }
 
