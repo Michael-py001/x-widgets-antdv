@@ -4,6 +4,9 @@ hero:
   name: x-widgets-antdv
   text: Vue 3 controls
   tagline: Typed schema widgets for forms, tables, and workflows built on Ant Design Vue 4.
+  image:
+    src: /logo.svg
+    alt: logo
   actions:
     - theme: brand
       text: Get started
