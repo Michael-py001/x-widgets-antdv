@@ -1,0 +1,105 @@
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.around {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.text-unit-left {
+    margin-right: 8px;
+    margin-bottom: 24px;
+}
+.text-unit-right {
+    margin-left: 8px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+}
+.line {
+    display: flex;
+    align-items: center;
+    .main {
+        flex: 1;
+        flex-grow: 1;
+        align-items: center;
+    }
+}
+
+.x-form-item {
+    :global {
+        .ant-form-item .ant-form-item-control-input-content {
+            display: flex;
+            align-items: center;
+        }
+        .ant-input-number,
+        .ant-input-textarea,
+        .ant-calendar-picker {
+            flex: 1;
+        }
+        .ant-input-number {
+            width: 100%;
+        }
+        .autoLabelHeight {
+            ::v-deep(.ant-form-item-label) > label {
+                height: fit-content;
+                white-space: pre-wrap;
+            }
+            .ant-form-item-label {
+                label {
+                    height: fit-content;
+                    white-space: pre-wrap;
+                }
+            }
+        }
+        .hideRequiredMark {
+            .ant-form-item-label {
+                .ant-form-item-required {
+                    label::before {
+                        display: none !important;
+                    }
+                    &::before {
+                        display: none !important;
+                    }
+                }
+            }
+            ::v-deep(.ant-form-item-label) {
+                .ant-form-item-required {
+                    display: none !important;
+                }
+            }
+        }
+        .addRequiredMark {
+            .ant-form-item-label {
+                label::before {
+                    display: inline-block;
+                    margin-right: 4px;
+                    color: #ff4d4f;
+                    font-size: 14px;
+                    font-family: SimSun, sans-serif;
+                    line-height: 1;
+                    content: '*';
+                }
+            }
+            ::v-deep(.ant-form-item-label) {
+                label::before {
+                    display: inline-block;
+                    margin-right: 4px;
+                    color: #ff4d4f;
+                    font-size: 14px;
+                    font-family: SimSun, sans-serif;
+                    line-height: 1;
+                    content: '*';
+                }
+            }
+        }
+        .formSlotStyle {
+            .ant-form-item-control-input-content {
+                flex: 1;
+                display: inline-block;
+            }
+        }
+    }
+}

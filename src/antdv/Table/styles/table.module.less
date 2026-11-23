@@ -1,0 +1,25 @@
+.empty_text_wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .empty_icon_wrap {
+        margin-top: 13px;
+        margin-bottom: 26px;
+    }
+}
+
+.empty_text {
+    color: #434343;
+}
+@keyframes activeLine_animate {
+    0% {
+        background-color: rgba(22, 119, 255, 0.521);
+    }
+    100% {
+        background-color: #fff;
+    }
+}
+.noscroll {
+    overflow-y: hidden !important; //加了scroll后 内容没超出最高高度的时候 也会加上滚动条（屏幕放大的时候）在这里做处理
+}

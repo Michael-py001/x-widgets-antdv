@@ -1,0 +1,30 @@
+# x-widgets-antdv
+
+> Vue 3 components and schema-driven business widgets based on Ant Design Vue 4.
+
+- Package: `x-widgets-antdv` (MIT)
+- Runtime: Vue 3.5+, Ant Design Vue 4.x, `@ant-design/icons-vue` 7.x; Vue Router 4.x is required by `GoBack`.
+- Install: `npm install x-widgets-antdv vue ant-design-vue @ant-design/icons-vue vue-router`
+- Styles: `ant-design-vue/dist/reset.css` and `x-widgets-antdv/style.css`.
+- Public API: named exports from the package root; do not deep-import source paths.
+
+## Read first
+
+- [Getting started](./guide)
+- [Exported components](./components)
+- [Controls](./components/controls)
+- [Schema forms](./components/forms)
+- [Table](./components/table)
+- [Extended widgets](./components/extended-widgets)
+- [Cross-library compatibility](./components/compatibility)
+- [AI guide](./ai)
+- Agent skill (repository source): `.agents/skills/x-widgets-antdv/SKILL.md`
+- Agent skill (published with docs): `./agents/skills/x-widgets-antdv/SKILL.md`
+
+## Grounding rules
+
+- `SearchForm` and other schema widgets receive host-owned form data; this library does not implement application API requests.
+- Use `ColumnForFormItemType` for Ant Design Vue package form fields; verify wrapper-specific props in source declarations.
+- `Table` forwards Ant Design Vue table contracts and adds only the wrapper props documented in the table guide.
+- The default plugin only registers exports with an `install` method; named imports are the reliable selective-registration path.
+- Do not assume compatibility with the Element Plus package or translate framework-specific props without checking target types.

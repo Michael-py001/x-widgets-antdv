@@ -1,0 +1,70 @@
+{
+  "name": "x-widgets-antdv",
+  "version": "0.1.0",
+  "description": "Reusable Vue 3 components built on Ant Design Vue 4",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./style.css": "./dist/index.css"
+  },
+  "files": [
+    "dist",
+    ".agents",
+    "LICENSE",
+    "README.md"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "typecheck": "vue-tsc --noEmit",
+    "test": "vitest run",
+    "prepack": "npm run build"
+  },
+  "license": "MIT",
+  "author": "wushili",
+  "keywords": ["vue", "vue3", "ant-design-vue", "components", "typescript"],
+  "engines": { "node": ">=18" },
+  "peerDependencies": {
+    "@ant-design/icons-vue": "^7.0.1",
+    "ant-design-vue": "^4.1.2",
+    "vue": "^3.5.0",
+    "vue-router": "^4.3.2"
+  },
+  "dependencies": {
+    "axios": "^1.21.1",
+    "dayjs": "^1.11.10",
+    "lodash-es": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/lodash-es": "^4.17.12",
+    "@vitejs/plugin-vue": "^5.2.3",
+    "@vitejs/plugin-vue-jsx": "^4.1.2",
+    "@vue/language-core": "^3.3.14",
+    "@vue/test-utils": "^2.4.6",
+    "jsdom": "^27.1.0",
+    "less": "^4.4.1",
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5",
+    "vite-plugin-dts": "^5.1.2",
+    "vitepress": "^1.6.4",
+    "vitest": "^5.1.1",
+    "vue-tsc": "^3.0.0"
+  },
+  "overrides": {
+    "vitepress": {
+      "vite": "$vite"
+    }
+  }
+}

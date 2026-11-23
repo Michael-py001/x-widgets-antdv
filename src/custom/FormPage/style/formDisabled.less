@@ -1,0 +1,161 @@
+.pointer-events-none {
+    pointer-events: none;
+    -ms-pointer-events: none;
+    background-color: #f3f5f7;
+    cursor: not-allowed;
+    color: rgba(0, 0, 0, 0.25);
+}
+
+fieldset[disabled] {
+    
+    // ::v-deep(.ant-form-item-control-input) {
+    //     .pointer-events-none;
+    // }
+    
+    ::v-deep(.ant-input-number-input) {
+        .pointer-events-none;
+    }
+    ::v-deep(.ant-picker-range) {
+        .pointer-events-none;
+    }
+    ::v-deep(.ant-radio-group) {
+        .pointer-events-none;
+    }
+    .ant-picker,
+    .ant-picker-range,
+    .ant-btn,
+    .ant-btn:hover,
+    .ant-btn:active,
+    .ant-btn.active,
+    .ant-calendar .ant-calendar-ok-btn,
+    .ant-calendar .ant-calendar-ok-btn:hover,
+    .ant-calendar .ant-calendar-ok-btn:active,
+    .ant-calendar .ant-calendar-ok-btn.active {
+        .pointer-events-none;
+        color: #ccc;
+        text-shadow: none;
+        background-color: #f3f5f7;
+        border-color: #d9d9d9;
+        box-shadow: none;
+        cursor: not-allowed;
+    }
+    .ant-btn.ant-btn-text,
+    .ant-btn.ant-btn-text:hover,
+    .ant-btn.ant-btn-text:active,
+    .ant-btn.ant-btn-text.active,
+    .ant-btn.ant-btn-link,
+    .ant-btn.ant-btn-link:hover,
+    .ant-btn.ant-btn-link:active,
+    .ant-btn.ant-btn-link.active {
+        border-color: transparent;
+        .pointer-events-none;
+    }
+    .ant-form-item-control-input .ant-form-item-control-input-content .ant-input {
+        background-color: #f3f5f7;
+        cursor: not-allowed;
+        .pointer-events-none;
+    }
+    ::v-deep(.ant-input) {
+        .pointer-events-none;
+        background-color: #f3f5f7;
+    }
+    .ant-input:hover,
+    .ant-calendar-picker:hover .ant-calendar-picker-input {
+        border-color: #e1e1e1;
+        .pointer-events-none;
+    }
+    input[type='radio'],
+    input[type='checkbox'],
+    .ant-checkbox-checked,
+    .ant-checkbox,
+    .ant-checkbox-wrapper,
+    .ant-form-item-no-colon,
+    .ant-checkbox-input,
+    .ant-checkbox-inner,
+    .ant-radio-inline,
+    .ant-radio-vertical,
+    .ant-checkbox-inline,
+    .ant-checkbox-vertical,
+    .ant-radio label,
+    .ant-calendar-picker-input .ant-checkbox label {
+        cursor: not-allowed;
+        .pointer-events-none;
+    }
+    .ant-input-number,
+    .ant-calendar-picker-input.ant-input,
+    .ant-input,
+    .ant-select-selector {
+        background-color: #f3f5f7;
+        .pointer-events-none;
+    }
+    ::v-deep(.ant-select-selector) {
+        &:hover {
+            .pointer-events-none;
+        }
+        .pointer-events-none;
+    }
+    ::v-deep(.ant-calendar-picker-input.ant-input) {
+        .pointer-events-none;
+    }
+    ::v-deep(.ant-upload) {
+        .pointer-events-none;
+    }
+    .ant-input-number:hover {
+        border-color: #e1e1e1;
+        .pointer-events-none;
+    }
+    .ant-select {
+        background-color: #f3f5f7;
+        pointer-events: none;
+        .pointer-events-none;
+    }
+    .ant-select .ant-select-selector,
+    .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+        background-color: #f3f5f7;
+        cursor: not-allowed;
+        .pointer-events-none;
+    }
+    .ant-select .ant-select-selection:hover,
+    .ant-select .ant-select-selection:active {
+        border-color: #d9d9d9;
+        .pointer-events-none;
+    }
+    .ant-cascader-picker {
+        background-color: #f3f5f7;
+        pointer-events: none;
+        cursor: not-allowed;
+        .pointer-events-none;
+    }
+    .ant-cascader-picker .ant-cascader-input {
+        pointer-events: none;
+        cursor: not-allowed;
+        .pointer-events-none;
+    }
+    .ant-calendar-time-input {
+        background-color: #f3f5f7;
+        opacity: 1;
+        cursor: not-allowed;
+        .pointer-events-none;
+    }
+    .ant-calendar-time-input:hover {
+        border-color: #e1e1e1;
+        .pointer-events-none;
+    }
+    .ant-calendar-picker {
+        .pointer-events-none;
+    }
+
+    .ant-upload {
+        .pointer-events-none;
+    }
+    .ant-upload-select-picture-card,
+    .ant-upload-list-item-actions .anticon-delete {
+        display: none;
+    }
+    .ant-calendar-picker-clear,
+    .ant-cascader-picker-clear,
+    .ant-upload-list-item-actions .anticon-delete,
+    .ant-upload-list-item .anticon-close {
+        display: none;
+    }
+}

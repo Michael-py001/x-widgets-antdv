@@ -1,0 +1,30 @@
+# x-widgets-antdv
+
+> 基于 Ant Design Vue 4 的 Vue 3 组件与 Schema 驱动的业务控件。
+
+- 包名：`x-widgets-antdv`（MIT）
+- 运行环境：Vue 3.5+、Ant Design Vue 4.x、`@ant-design/icons-vue` 7.x；`GoBack` 需要 Vue Router 4.x。
+- 安装：`npm install x-widgets-antdv vue ant-design-vue @ant-design/icons-vue vue-router`
+- 样式：`ant-design-vue/dist/reset.css` 与 `x-widgets-antdv/style.css`。
+- 公开 API：从包根目录具名导出；请勿深层导入源码路径。
+
+## 优先阅读
+
+- [入门指南](./guide)
+- [导出的组件](./components)
+- [基础控件](./components/controls)
+- [表单 Schema](./components/forms)
+- [表格](./components/table)
+- [扩展组件](./components/extended-widgets)
+- [跨库兼容性](./components/compatibility)
+- [AI 指南](./ai)
+- Agent 技能（仓库源码）：`.agents/skills/x-widgets-antdv/SKILL.md`
+- Agent 技能（随文档发布）：`../agents/skills/x-widgets-antdv/SKILL.md`
+
+## 依据规则
+
+- `SearchForm` 及其他 Schema 控件接收由宿主持有的表单数据；本库不实现应用的 API 请求。
+- Ant Design Vue 包的表单字段请使用 `ColumnForFormItemType`；包装层专属 props 请在源码声明中核实。
+- `Table` 转发 Ant Design Vue 的表格契约，仅增加表格指南中记录的包装层 props。
+- 默认插件只注册带有 `install` 方法的导出；具名导入是按需注册的可靠方式。
+- 不要假设与 Element Plus 包兼容，也不要在未核对目标类型的情况下转译框架专属 props。

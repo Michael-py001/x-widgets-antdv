@@ -1,0 +1,59 @@
+.x-search-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin-bottom: 22px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid #e4e4e4;
+    &.showMore {
+        padding-bottom: 22px;
+    }
+    &-more-icon {
+        display: inline-block;
+        position: absolute;
+        left: 50%;
+        bottom: -13px;
+        transform: translateX(-50%);
+        height: 13px;
+        width: 33px;
+        cursor: pointer;
+        border: 1px #e4e4e4 solid;
+        border-top: none;
+        border-radius: 0 0 4px 4px;
+        text-align: center;
+        line-height: 13px;
+        color: #999;
+    }
+    .ant-form-item {
+        margin-right: 16px;
+    }
+    // 下拉框
+    ::v-deep(.ant-select) {
+        min-width: 120px;
+    }
+    // 表单
+    &-field {
+        flex: 1;
+        height: 32px;
+        // padding: 0 6px 0px;
+        overflow: hidden;
+        transition: height 0.3s;
+        &.showMore {
+            height: auto;
+            // padding-bottom: 8px;
+        }
+    }
+    // 按钮
+    &-btns {
+        display: flex;
+        flex-grow: 0;
+        padding-left: 10px;
+        // min-width: 170px;
+        button {
+            &:first-child {
+                margin-right: 10px;
+            }
+        }
+    }
+}
