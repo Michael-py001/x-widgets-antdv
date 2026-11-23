@@ -28,9 +28,11 @@ const zhSearchTranslations = {
 
 export default defineConfig({
   title: 'X Widgets · Ant Design Vue',
-  description: 'Reusable Vue 3 components built on Ant Design Vue 4.',
+  description: '基于 Ant Design Vue 4 的 Vue 3 表单组件库，提供类型化 Schema 表单与业务组件。',
+  lang: 'zh-CN',
   cleanUrls: true,
   base: env.VITEPRESS_BASE || '/',
+  head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]],
   vite: {
     plugins: [vueJsx()],
     resolve: {
@@ -39,66 +41,84 @@ export default defineConfig({
       },
     },
   },
-  themeConfig: {
-    search: { provider: 'local' },
-    outline: { level: [2, 3] },
-  },
   locales: {
     root: {
-      label: 'English',
-      lang: 'en',
-      themeConfig: {
-        nav: [
-          { text: 'Guide', link: '/guide' },
-          { text: 'Components', link: '/components' },
-          { text: 'AI usage', link: '/ai' },
-        ],
-        sidebar: {
-          '/guide': [
-            { text: 'Start here', items: [{ text: 'Installation & setup', link: '/guide' }] },
-          ],
-          '/components': [
-            { text: 'Reference', items: [
-              { text: 'Exported components', link: '/components' },
-              { text: 'Controls', link: '/components/controls' },
-              { text: 'Schema forms', link: '/components/forms' },
-              { text: 'Table', link: '/components/table' },
-              { text: 'Extended widgets', link: '/components/extended-widgets' },
-              { text: 'Cross-library compatibility', link: '/components/compatibility' },
-            ] },
-          ],
-          '/ai': [{ text: 'AI integration', items: [{ text: 'Agent guide', link: '/ai' }] }],
-        },
-      },
-    },
-    'zh-CN': {
       label: '简体中文',
       lang: 'zh-CN',
       title: 'X Widgets · Ant Design Vue 中文文档',
-      description: '基于 Ant Design Vue 构建的可复用 Vue 3 组件。',
+      description: '基于 Ant Design Vue 4 的 Vue 3 表单组件库，提供类型化 Schema 表单与业务组件。',
       themeConfig: {
-        search: { provider: 'local', options: { translations: zhSearchTranslations } },
+        logo: '/logo.svg',
         nav: [
-          { text: '指南', link: '/zh-CN/guide' },
-          { text: '组件', link: '/zh-CN/components/' },
-          { text: 'AI 使用', link: '/zh-CN/ai' },
+          { text: '指南', link: '/guide' },
+          { text: '组件', link: '/components/' },
+          { text: 'AI 使用', link: '/ai' },
         ],
+        search: { provider: 'local', options: { translations: zhSearchTranslations } },
         sidebar: {
-          '/zh-CN/guide': [
-            { text: '从这里开始', items: [{ text: '安装与配置', link: '/zh-CN/guide' }] },
+          '/guide': [
+            { text: '从这里开始', items: [{ text: '安装与配置', link: '/guide' }] },
           ],
-          '/zh-CN/components': [
+          '/components': [
             { text: '参考', items: [
-              { text: '导出的组件', link: '/zh-CN/components/' },
-              { text: '基础控件', link: '/zh-CN/components/controls' },
-              { text: '表单 Schema', link: '/zh-CN/components/forms' },
-              { text: '表格', link: '/zh-CN/components/table' },
-              { text: '扩展组件', link: '/zh-CN/components/extended-widgets' },
-              { text: '跨库兼容性', link: '/zh-CN/components/compatibility' },
+              { text: '导出的组件', link: '/components/' },
+              { text: '基础控件', link: '/components/controls' },
+              { text: '表单 Schema', link: '/components/forms' },
+              { text: '表格', link: '/components/table' },
+              { text: '扩展组件', link: '/components/extended-widgets' },
+              { text: '跨库兼容性', link: '/components/compatibility' },
             ] },
           ],
-          '/zh-CN/ai': [{ text: 'AI 集成', items: [{ text: 'Agent 使用指南', link: '/zh-CN/ai' }] }],
+          '/ai': [{ text: 'AI 集成', items: [{ text: 'Agent 使用指南', link: '/ai' }] }],
         },
+        outline: { level: [2, 3], label: '本页目录' },
+        docFooter: { prev: '上一页', next: '下一页' },
+        lastUpdated: { text: '最后更新于' },
+        darkModeSwitchLabel: '主题',
+        lightModeSwitchTitle: '切换到浅色主题',
+        darkModeSwitchTitle: '切换到深色主题',
+        sidebarMenuLabel: '菜单',
+        returnToTopLabel: '返回顶部',
+        langMenuLabel: '切换语言',
+        skipToContentLabel: '跳转到正文',
+        notFound: {
+          title: '页面未找到',
+          quote: '如果你没有改变方向，继续寻找，最终会到达你想去的地方。',
+          linkLabel: '返回首页',
+          linkText: '返回首页',
+        },
+      },
+    },
+    en: {
+      label: 'English',
+      lang: 'en',
+      title: 'X Widgets · Ant Design Vue',
+      description: 'Vue 3 form component library built on Ant Design Vue 4 with typed schema-driven forms.',
+      themeConfig: {
+        logo: '/logo.svg',
+        nav: [
+          { text: 'Guide', link: '/en/guide' },
+          { text: 'Components', link: '/en/components/' },
+          { text: 'AI usage', link: '/en/ai' },
+        ],
+        search: { provider: 'local' },
+        sidebar: {
+          '/en/guide': [
+            { text: 'Start here', items: [{ text: 'Installation & setup', link: '/en/guide' }] },
+          ],
+          '/en/components': [
+            { text: 'Reference', items: [
+              { text: 'Exported components', link: '/en/components/' },
+              { text: 'Controls', link: '/en/components/controls' },
+              { text: 'Schema forms', link: '/en/components/forms' },
+              { text: 'Table', link: '/en/components/table' },
+              { text: 'Extended widgets', link: '/en/components/extended-widgets' },
+              { text: 'Cross-library compatibility', link: '/en/components/compatibility' },
+            ] },
+          ],
+          '/en/ai': [{ text: 'AI integration', items: [{ text: 'Agent guide', link: '/en/ai' }] }],
+        },
+        outline: { level: [2, 3] },
       },
     },
   },

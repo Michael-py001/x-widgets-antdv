@@ -14,7 +14,7 @@ Use this skill whenever a task builds or changes UI in a Vue 3 + Ant Design Vue 
 
 ## Read the local contract
 
-Before writing code, read these package docs (relative to the package root). Use `docs/` for English and the matching path under `docs/zh-CN/` for Simplified Chinese (for example, `docs/guide.md` → `docs/zh-CN/guide.md`). Follow the user's language when explaining the API, while preserving component names, prop names, and code identifiers.
+Before writing code, read these package docs (relative to the package root). Use `docs/` for Simplified Chinese (the default) and `docs/en/` for English (for example, `docs/guide.md` → `docs/en/guide.md`). Follow the user's language when explaining the API, while preserving component names, prop names, and code identifiers.
 
 1. `docs/guide.md` for peer dependencies, registration, and CSS.
 2. `docs/components/index.md` for exact public exports.

@@ -1,6 +1,6 @@
 # x-widgets-antdv
 
-> Vue 3 components and schema-driven business widgets based on Ant Design Vue 4.
+> Vue 3 form component library with typed schema-driven forms and business widgets based on Ant Design Vue 4.
 
 - Package: `x-widgets-antdv` (MIT)
 - Runtime: Vue 3.5+, Ant Design Vue 4.x, `@ant-design/icons-vue` 7.x; Vue Router 4.x is required by `GoBack`.

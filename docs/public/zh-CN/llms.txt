@@ -1,6 +1,6 @@
 # x-widgets-antdv
 
-> 基于 Ant Design Vue 4 的 Vue 3 组件与 Schema 驱动的业务控件。
+> 基于 Ant Design Vue 4 的 Vue 3 表单组件库，提供类型化 Schema 表单与业务控件。
 
 - 包名：`x-widgets-antdv`（MIT）
 - 运行环境：Vue 3.5+、Ant Design Vue 4.x、`@ant-design/icons-vue` 7.x；`GoBack` 需要 Vue Router 4.x。

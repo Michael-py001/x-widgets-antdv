@@ -1,6 +1,6 @@
-# Table
+# 表格
 
-`Table` wraps Ant Design Vue's table and forwards its upstream table props, events, and slots. It adds display and sizing options; it does not fetch, sort, or page application data on its own.
+`Table` 包装了 Ant Design Vue 的表格，并转发其上游的表格 props、事件与插槽。它增加了显示与尺寸相关的选项；但不会自行请求、排序或分页应用数据。
 
 ```vue
 <script setup lang="ts">
@@ -22,21 +22,21 @@ const rows = [
 </template>
 ```
 
-## Wrapper props
+## 包装层 props
 
-| Prop | Default | Purpose |
+| Prop | 默认值 | 用途 |
 | --- | --- | --- |
-| `striped` | `true` | Enable alternating row styling from the wrapper. |
-| `autoSrcollHeight` | `true` | Automatically determine table scroll height. The misspelling is the existing public prop name; keep it exact. |
-| `getSrcollHeightOnce` | `false` | Measure scroll height only once. |
-| `extraHeight` | `0` | Additional height adjustment for the automatic sizing calculation. |
-| `useDefaultStyle` | `false` | Control the wrapper's default style behavior. |
-| `emptyText` | `暂无数据` | Empty-state text. |
-| `emptyImage` | `''` | Optional empty-state image. |
-| `showUpOut` | `false` | Enable the wrapper's tree-row collapse control. |
+| `striped` | `true` | 由包装层启用斑马纹行样式。 |
+| `autoSrcollHeight` | `true` | 自动计算表格滚动高度。该拼写错误是现存公开的 prop 名称，请保持原样。 |
+| `getSrcollHeightOnce` | `false` | 仅测量一次滚动高度。 |
+| `extraHeight` | `0` | 自动尺寸计算时的额外高度调整。 |
+| `useDefaultStyle` | `false` | 控制包装层默认样式行为。 |
+| `emptyText` | `暂无数据` | 空状态文案。 |
+| `emptyImage` | `''` | 可选的空状态图片。 |
+| `showUpOut` | `false` | 启用包装层的树形行收起控件。 |
 
-The wrapper also exposes Ant Design Vue `TableProps`; use those declarations for the upstream column, pagination, selection, event, and slot contracts. `TableProps` is exported from the package root.
+包装层同时暴露 Ant Design Vue 的 `TableProps`；上游的列、分页、选择、事件与插槽契约请参考相应声明。`TableProps` 从包根目录导出。
 
-## Data flow
+## 数据流
 
-Pass rows and columns from the host application. Handle remote sorting, filtering, and pagination in the page/composable, then provide the current page's data and pagination props to `Table`. This package is a presentational component library, not an application data layer.
+行数据与列配置由宿主应用传入。请在页面/composable 中处理远程排序、筛选与分页，再把当前页数据与分页 props 提供给 `Table`。本包是展示型组件库，而非应用数据层。

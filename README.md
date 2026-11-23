@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/Michael-py001/x-widgets-antdv/actions/workflows/ci.yml/badge.svg)](https://github.com/Michael-py001/x-widgets-antdv/actions/workflows/ci.yml) [![Docs](https://img.shields.io/badge/docs-online-blue.svg)](https://michael-py001.github.io/x-widgets-antdv/) [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
-Vue 3 component library built on Ant Design Vue 4. Component names and APIs follow the wrapped Ant Design Vue controls where possible; custom widgets provide schema-driven forms, tables, dialogs, and related page workflows.
+Vue 3 form component library built on Ant Design Vue 4. Component names and APIs follow the wrapped controls where possible; custom widgets provide typed schema-driven forms, tables, dialogs, and related page workflows.
 
 ## Requirements
 

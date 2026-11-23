@@ -1,6 +1,6 @@
-# Schema forms
+# 表单 Schema
 
-The form widgets accept field configuration through `column` / `formModel` and bind each field to a shared `formData` object. Each schema entry uses `el` (or the compatible `type`) to choose a control; supported field props and custom slots are described by the exported `ColumnForFormItemType`.
+表单控件通过 `column` / `formModel` 接收字段配置，并将每个字段绑定到共享的 `formData` 对象。每个 schema 条目通过 `el`（或兼容的 `type`）选择控件；受支持的字段 props 与自定义插槽由导出的 `ColumnForFormItemType` 描述。
 
 ## SearchForm
 
@@ -32,63 +32,63 @@ function search(values: typeof filters) {
 
 ### SearchForm props
 
-| Prop | Type / default | Purpose |
+| Prop | 类型 / 默认值 | 用途 |
 | --- | --- | --- |
-| `column` | `ColumnForFormItemType[]`, `[]` | Field schema array. |
-| `formData` | object, required | Bound values. Mutations are reflected into this object. |
-| `layout` | string, `inline` | Ant Design Vue form layout. |
-| `gutter` | array, `[12, 12]` | Row/column spacing. |
-| `disabled` | boolean, `false` | Disable fields unless a field supplies its own value. |
-| `enabledExpand` | boolean, `true` | Enable automatic collapse/expand behavior. |
-| `showButtons` | boolean, `true` | Render built-in reset/search controls. |
-| `resetText`, `searchText` | string | Button labels; an empty string hides that button. |
-| `loading` | boolean, `false` | Disable built-in buttons and show loading state. |
+| `column` | `ColumnForFormItemType[]`，`[]` | 字段 schema 数组。 |
+| `formData` | object，必填 | 绑定的值。字段的变更会反映到该对象中。 |
+| `layout` | string，`inline` | Ant Design Vue 表单布局。 |
+| `gutter` | array，`[12, 12]` | 行/列间距。 |
+| `disabled` | boolean，`false` | 禁用字段，除非字段自身提供了取值。 |
+| `enabledExpand` | boolean，`true` | 启用自动折叠/展开行为。 |
+| `showButtons` | boolean，`true` | 渲染内置的重置/搜索控件。 |
+| `resetText`、`searchText` | string | 按钮文案；空字符串会隐藏对应按钮。 |
+| `loading` | boolean，`false` | 禁用内置按钮并显示加载状态。 |
 
-Emits `search(values)`, `reset(values)`, and `expand(isExpanded)`. The component exposes `handleReset`, `handleSearch`, `validate`, `clearValidate`, `resetFields`, `formRef`, and `getSelectedAddressName`.
+触发 `search(values)`、`reset(values)` 与 `expand(isExpanded)` 事件。暴露 `handleReset`、`handleSearch`、`validate`、`clearValidate`、`resetFields`、`formRef` 与 `getSelectedAddressName`。
 
-## CustomFormItem field schema
+## CustomFormItem 字段 schema
 
-| Field | Purpose |
+| 字段 | 用途 |
 | --- | --- |
-| `name` | Key or key path in `formData`. |
-| `label` | Visible field label. |
-| `el` / `type` | Control kind selected by the FormItem widget map. Common values include `text`, `select`, `textarea`, `input-number`, `input`, `time-picker`, `date-picker`, `time-range-picker`, `checkbox-group`, `radio-group`, `city-picker`, `tree-select`, `input-password`, `input-search`, `range-picker`, `checkbox`, `switch`, `auto-complete`, `area-picker`, and `range-input`, plus the form-aware controls `cascader`, `rate`, `slider`, `mentions`, `transfer`, and `upload`; the `x-` aliases (for example `x-cascader`) remain accepted for legacy schemas, as do `autocomplete`, `date-picker`, `range-picker`, `time-picker`, `time-range-picker`, `checkbox`, `checkbox-group`, `switch`, `tree-select`, `select`, `input`, `textarea`, and `input-number` for parity with the Element library. |
-| `props` | Props forwarded to the selected input control. |
-| `options` | Select/radio/checkbox choices; option records normally contain `label` and `value`. |
-| `rules` | Ant Design Vue validation rules. |
-| `event` | Control event handlers, e.g. `onChange`. |
-| `selfProps` | Props forwarded to the Ant Design Vue `Form.Item`. |
-| `slotProps` | Props forwarded to the input inside the item. |
-| `beforeSlot`, `afterSlot`, `formSlot` | Parent slot names or render callbacks returning Vue `VNodeChild`; callbacks receive `{ item, formData, name, label }`. |
-| `disabled`, `hideRequiredMark`, `addRequiredMark` | Per-field disabled / required-mark behavior. |
-| `beforeText`, `afterText`, `textValue`, `unitStyle` | Display text and layout helpers. |
+| `name` | `formData` 中的键或键路径。 |
+| `label` | 字段的可见标签。 |
+| `el` / `type` | 由 FormItem widget map 选择控件。常用值包括 `text`、`select`、`textarea`、`input-number`、`input`、`time-picker`、`date-picker`、`time-range-picker`、`checkbox-group`、`radio-group`、`city-picker`、`tree-select`、`input-password`、`input-search`、`range-picker`、`checkbox`、`switch`、`auto-complete`、`area-picker`、`range-input`，以及支持表单桥接的 `cascader`、`rate`、`slider`、`mentions`、`transfer`、`upload`；仍接受旧 schema 中的 `x-` 别名（如 `x-cascader`），同时为与 Element 包保持一致还接受 `autocomplete`、`date-picker`、`range-picker`、`time-picker`、`time-range-picker`、`checkbox`、`checkbox-group`、`switch`、`tree-select`、`select`、`input`、`textarea` 和 `input-number`。 |
+| `props` | 转发给所选输入控件的 props。 |
+| `options` | 下拉/单选/复选项；选项对象通常包含 `label` 与 `value`。 |
+| `rules` | Ant Design Vue 校验规则。 |
+| `event` | 控件事件处理器，例如 `onChange`。 |
+| `selfProps` | 转发给 Ant Design Vue `Form.Item` 的 props。 |
+| `slotProps` | 转发给条目内部输入控件的 props。 |
+| `beforeSlot`、`afterSlot`、`formSlot` | 父组件插槽名，或返回 Vue `VNodeChild` 的渲染回调；回调接收 `{ item, formData, name, label }`。 |
+| `disabled`、`hideRequiredMark`、`addRequiredMark` | 单个字段的禁用 / 必填标记行为。 |
+| `beforeText`、`afterText`、`textValue`、`unitStyle` | 显示文本与布局辅助项。 |
 
-### Form-aware control values
+### 表单适配控件的值
 
-The form-aware controls write their current value back into `formData[name]` using their native update event, so do not add a second `v-model`. Most use `value` (`cascader`, `rate`, `slider`, `mentions`), while `transfer` binds `formData[name]` to `targetKeys` and `upload` binds it to `fileList`. Pass Ant Design Vue props through `props` / `slotProps` and events through `event`.
+表单适配控件会通过自身的更新事件把当前值写回 `formData[name]`，不要再额外传 `v-model`。大多数控件使用 `value`（`cascader`、`rate`、`slider`、`mentions`），而 `transfer` 将 `formData[name]` 绑定到 `targetKeys`，`upload` 绑定到 `fileList`。Ant Design Vue 的 props 通过 `props` / `slotProps` 传入，事件通过 `event` 传入。
 
-Use slots for genuinely custom UI; use schema options and control props for ordinary fields. For the complete TS surface, import `ColumnForFormItemType` and let TypeScript validate each field.
+真正自定义的 UI 才使用插槽；普通字段使用 schema 选项与控件 props 即可。若要查看完整的 TS 接口，请导入 `ColumnForFormItemType`，让 TypeScript 校验每个字段。
 
 ## FormPage
 
-`FormPage` renders grouped form sections. A block contains `title`, `display`, `style`, `class`, `fieldsetStyle`, and `column`; each field uses the schema above. The host supplies and owns `formData`.
+`FormPage` 渲染分组的表单区块。一个区块包含 `title`、`display`、`style`、`class`、`fieldsetStyle` 与 `column`，其中每个字段使用上述 schema。`formData` 由宿主提供并持有。
 
-| Prop | Default | Purpose |
+| Prop | 默认值 | 用途 |
 | --- | --- | --- |
-| `formModel`, `formData` | `[]`, `{}` | Section schema and bound values. |
-| `layout` | `horizontal` | Ant Design Vue form layout. |
-| `labelCol`, `wrapperCol` | `{ style: { minWidth: '100px' } }`, `{ span: 17 }` | Label and control column settings. |
-| `labelAlign` | `left` | Label alignment. |
-| `gutter` | `[12, 0]` | Row spacing. |
-| `colspan` | `24` | Default field span. |
-| `verticalGap` | `0` | Spacing below each field. |
-| `disabled`, `loading` | `undefined`, `false` | Disable fields or show the loading indicator. |
-| `asChild` | `false` | Use intrinsic height when embedded in another layout. |
-| `extraHeight` | `0` | Reserve viewport height when sizing the container. |
-| `fieldsetStyle` | `{}` | Root fieldset styles. |
-| `autocomplete` | `on` | Forwarded to the underlying form. |
+| `formModel`、`formData` | `[]`、`{}` | 区块 schema 与绑定的值。 |
+| `layout` | `horizontal` | Ant Design Vue 表单布局。 |
+| `labelCol`、`wrapperCol` | `{ style: { minWidth: '100px' } }`、`{ span: 17 }` | 标签与控件的列设置。 |
+| `labelAlign` | `left` | 标签对齐方式。 |
+| `gutter` | `[12, 0]` | 行间距。 |
+| `colspan` | `24` | 字段默认占列数。 |
+| `verticalGap` | `0` | 每个字段下方的间距。 |
+| `disabled`、`loading` | `undefined`、`false` | 禁用字段或显示加载指示器。 |
+| `asChild` | `false` | 嵌入其他布局时使用固有高度。 |
+| `extraHeight` | `0` | 计算容器尺寸时预留的视口高度。 |
+| `fieldsetStyle` | `{}` | 根 fieldset 样式。 |
+| `autocomplete` | `on` | 转发给底层表单。 |
 
-Slots: `header`, `footer`, `modelTitle`, and field slots named by a schema item's `slot`/slot props. A field's `slot` may also be a TSX render callback returning `VNodeChild` and receiving `{ item, formData }`. Exposed methods include `validate`, `validateFields`, `clearValidate`, `resetFields`, `scrollToField`, `scrollToFields`, `resetValidate`, and `getSelectedAddressName`.
+插槽包括 `header`、`footer`、`modelTitle`，以及由 schema 条目的 `slot` / 插槽 props 命名的字段插槽。字段的 `slot` 也可配置返回 `VNodeChild` 的 TSX 渲染回调，参数为 `{ item, formData }`。暴露的方法包括 `validate`、`validateFields`、`clearValidate`、`resetFields`、`scrollToField`、`scrollToFields`、`resetValidate` 与 `getSelectedAddressName`。
 
 ## FormModal
 
@@ -102,22 +102,22 @@ Slots: `header`, `footer`, `modelTitle`, and field slots named by a schema item'
 />
 ```
 
-The `confirm` event runs after validation and receives the current form data. With `autoClose` (default `true`), cancel resets the fields, emits `update:show(false)`, and emits `cancel(false)`; with `autoClose=false`, it only emits `cancel(false)`. `title` and `modalFooter` slots customize the dialog shell; form slots are forwarded to `FormPage`.
+`confirm` 事件在校验通过后触发，并接收当前表单数据。启用 `autoClose`（默认 `true`）时，取消会重置字段、触发 `update:show(false)` 并触发 `cancel(false)`；当 `autoClose=false` 时，仅触发 `cancel(false)`。`title` 与 `modalFooter` 插槽可自定义弹窗外壳；表单插槽会转发给 `FormPage`。
 
-| Prop | Default | Purpose |
+| Prop | 默认值 | 用途 |
 | --- | --- | --- |
-| `modalTitle`, `show`, `formModel`, `formData` | `标题`, `false`, `[]`, `{}` | Dialog title/visibility and form inputs. |
-| `modalWidth` | `500px` | Dialog width. |
-| `cancelText`, `confirmText` | `取消`, `确认` | Footer labels; an empty label hides its button. |
-| `showCancelBtn`, `showConfirmBtn`, `showFooter` | `true` | Control default footer elements. |
-| `okBtnLoading` | `false` | Loading state for confirmation. |
-| `autoClose` | `true` | Close and reset on cancel when enabled. |
-| `layout`, `labelAlign` | `horizontal`, `right` | Form layout and label alignment. |
-| `labelCol`, `wrapperCol` | `{ style: { minWidth: '100px' } }`, `{ span: 17 }` | Form label and control columns. |
-| `gutter`, `fieldsetStyle`, `showFullScreenIcon`, `autocomplete` | `[12, 0]`, `{}`, `true`, `on` | Forwarded form/dialog presentation settings. |
+| `modalTitle`、`show`、`formModel`、`formData` | `标题`、`false`、`[]`、`{}` | 弹窗标题/可见性与表单输入。 |
+| `modalWidth` | `500px` | 弹窗宽度。 |
+| `cancelText`、`confirmText` | `取消`、`确认` | 底部按钮文案；空文案会隐藏对应按钮。 |
+| `showCancelBtn`、`showConfirmBtn`、`showFooter` | `true` | 控制默认的底部元素。 |
+| `okBtnLoading` | `false` | 确认按钮的加载状态。 |
+| `autoClose` | `true` | 启用时取消会关闭并重置。 |
+| `layout`、`labelAlign` | `horizontal`、`right` | 表单布局与标签对齐方式；`layout` 会传递给 `FormPage` 并实际生效。 |
+| `labelCol`、`wrapperCol` | `{ style: { minWidth: '100px' } }`、`{ span: 17 }` | 表单标签与控件的列设置。 |
+| `gutter`、`fieldsetStyle`、`showFullScreenIcon`、`autocomplete` | `[12, 0]`、`{}`、`true`、`on` | 转发的表单/弹窗外观设置。 |
 
-Exposed methods include `validate`, `validateFields`, `resetFields`, `scrollToField`, `scrollToFields`, `clickConfirm`, and `clickCancel` (plus the nested `FormPageRef`). The supplied `formData` object is the model; although `update:formData` is declared, this component's model binding is getter-only, so do not rely on it as a replacement-object event.
+暴露的方法包括 `validate`、`validateFields`、`resetFields`、`scrollToField`、`scrollToFields`、`clickConfirm` 与 `clickCancel`（以及内层的 `FormPageRef`）。传入的 `formData` 对象即为数据模型；虽然声明了 `update:formData`，但本组件的模型绑定是只读 getter，因此不要把它当作替换对象事件来依赖。
 
-## Validation and ownership
+## 校验与数据归属
 
-The host owns `formData`. Keep the object stable (for example, `reactive`) so the form controls and the caller observe the same model. Handle `search` at the page boundary; this package does not fetch application data or implement a query API.
+`formData` 由宿主持有。请保持对象稳定（例如使用 `reactive`），使表单控件与调用方观察到同一个模型。请在页面边界处理 `search`；本包不请求应用数据，也不实现查询 API。

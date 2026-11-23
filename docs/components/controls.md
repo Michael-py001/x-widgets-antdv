@@ -1,8 +1,8 @@
-# Controls
+# 基础控件
 
-The package root re-exports Ant Design Vue controls with the same component names. Use the upstream control contract first; this package adds a small set of form-aware adapters and keeps the framework's native props available.
+包根目录会以相同的组件名重新导出 Ant Design Vue 控件。使用时应先遵循上游控件契约；本包只增加少量表单适配能力，并保留框架原生 props。
 
-## Import from the package root
+## 从包根目录导入
 
 ```ts
 import {
@@ -12,28 +12,27 @@ import {
   Modal,
   Select,
   Table,
-  Tag,
-  TimeRangePicker
+  Tag
 } from 'x-widgets-antdv'
 import 'ant-design-vue/dist/reset.css'
 import 'x-widgets-antdv/style.css'
 ```
 
-Deep imports are not a stable API. The complete export list is maintained in [Exported components](/components/).
+深层源码路径不属于稳定 API。完整导出清单维护在[导出的组件](/components/)。
 
-## Control groups
+## 控件分组
 
-| Group | Exports | Notes |
+| 分组 | 导出 | 说明 |
 | --- | --- | --- |
-| Data entry | `AutoComplete`, `Cascader`, `Checkbox`, `CheckboxGroup`, `DatePicker`, `Input`, `InputNumber`, `Mentions`, `Radio`, `RadioGroup`, `RangePicker`, `Rate`, `Select`, `Slider`, `Switch`, `Textarea`, `TimePicker`, `TimeRangePicker`, `Upload` | Use the corresponding Ant Design Vue props and events. Form-aware fields can also receive the schema bridge described in [Schema forms](/components/forms). |
-| Layout | `Anchor`, `Breadcrumb`, `Col`, `Divider`, `Flex`, `Layout`, `Menu`, `PageHeader`, `Row`, `Space`, `Steps`, `Tabs`, `Typography` | Layout and navigation remain framework-native; choose the upstream component when composing a page shell. |
-| Feedback and overlay | `Alert`, `Drawer`, `Empty`, `Modal`, `Popconfirm`, `Popover`, `Result`, `Spin`, `Tooltip`, `message`, `notification` | Imperative services are exported as named values; call them from application actions rather than from render functions. |
-| Data display | `Badge`, `Calendar`, `Card`, `Carousel`, `Descriptions`, `Image`, `List`, `Progress`, `Statistic`, `Table`, `Tag`, `Timeline`, `Tree`, `TreeSelect` | `Table` is the package wrapper and accepts the documented `TableProps` additions. |
-| Utility | `Affix`, `App`, `Avatar`, `ConfigProvider`, `FloatButton`, `QRCode`, `Segmented`, `Skeleton`, `Tour`, `Transfer`, `Watermark` | These exports keep their upstream component model; verify version-specific props against the generated declarations. |
+| 数据录入 | `AutoComplete`、`Cascader`、`Checkbox`、`CheckboxGroup`、`DatePicker`、`Input`、`InputNumber`、`Mentions`、`Radio`、`RadioGroup`、`RangePicker`、`Rate`、`Select`、`Slider`、`Switch`、`Textarea`、`TimePicker`、`TimeRangePicker`、`Upload` | 使用对应的 Ant Design Vue props 与事件；表单适配字段还可使用[表单 Schema](/components/forms)中的桥接契约。 |
+| 布局与导航 | `Anchor`、`Breadcrumb`、`Col`、`Divider`、`Flex`、`Layout`、`Menu`、`PageHeader`、`Row`、`Space`、`Steps`、`Tabs`、`Typography` | 保持框架原生行为；组合页面壳层时优先选择上游控件。 |
+| 反馈与浮层 | `Alert`、`Drawer`、`Empty`、`Modal`、`Popconfirm`、`Popover`、`Result`、`Spin`、`Tooltip`、`message`、`notification` | 命令式服务以具名值导出，应在页面动作中调用，不要在渲染函数中调用。 |
+| 数据展示 | `Badge`、`Calendar`、`Card`、`Carousel`、`Descriptions`、`Image`、`List`、`Progress`、`Statistic`、`Table`、`Tag`、`Timeline`、`Tree`、`TreeSelect` | `Table` 是本包的表格封装，额外能力见文档中的 `TableProps`。 |
+| 工具控件 | `Affix`、`App`、`Avatar`、`ConfigProvider`、`FloatButton`、`QRCode`、`Segmented`、`Skeleton`、`Tour`、`Transfer`、`Watermark` | 保持上游控件模型；版本相关 props 请以生成的声明为准。 |
 
-## Native controls
+## 原生控件
 
-For a native control, write the same template and event shape you would write with Ant Design Vue:
+原生控件的模板和事件写法与 Ant Design Vue 一致：
 
 ```vue
 <script setup lang="ts">
@@ -43,8 +42,8 @@ import { Button, Input, Select } from 'x-widgets-antdv'
 const search = ref('')
 const status = ref<string>()
 const statusOptions = [
-  { label: 'Draft', value: 'draft' },
-  { label: 'Published', value: 'published' }
+  { label: '草稿', value: 'draft' },
+  { label: '已发布', value: 'published' }
 ]
 </script>
 
@@ -55,17 +54,17 @@ const statusOptions = [
 </template>
 ```
 
-The package does not fetch options or own request state. Keep options, loading state, permissions, and side effects in the host application.
+本包不负责请求选项或维护请求状态。选项、loading、权限和副作用应由宿主应用管理。
 
-## Interactive example
+## 交互示例
 
-The controls below use local reactive state; change the keyword or status and apply it to update the summary.
+下面的控件使用本地响应式状态；修改关键词或状态并点击应用，即可更新摘要。
 
 <ClientOnly><AntdvControlDemo /></ClientOnly>
 
-## Form-aware controls
+## 表单适配控件
 
-`Input`, `Select`, `AutoComplete`, `RangePicker`, `TimePicker`, `Cascader`, `Rate`, `Slider`, `Mentions`, `Transfer`, `Upload`, and related fields can be rendered by `CustomFormItem`, `FormPage`, or `SearchForm`. In that mode, the schema owns the field name and the component receives the form bridge internally:
+`Input`、`Select`、`AutoComplete`、`RangePicker`、`TimePicker`、`Cascader`、`Rate`、`Slider`、`Mentions`、`Transfer`、`Upload` 等字段可以由 `CustomFormItem`、`FormPage` 或 `SearchForm` 渲染。此时字段名由 Schema 管理，组件内部接收表单桥接：
 
 ```ts
 const columns: ColumnForFormItemType[] = [
@@ -82,9 +81,9 @@ const columns: ColumnForFormItemType[] = [
 ]
 ```
 
-The schema types added for full form-control parity are:
+为补齐表单控件对等能力而新增的 schema `type` 如下：
 
-| Schema `type` | Alias | Bound value key in `formData` | Native update event |
+| Schema `type` | 别名 | `formData` 中绑定的值字段 | 原生更新事件 |
 | --- | --- | --- | --- |
 | `cascader` | `x-cascader` | `value` | `update:value` |
 | `rate` | `x-rate` | `value` | `update:value` |
@@ -93,12 +92,12 @@ The schema types added for full form-control parity are:
 | `transfer` | `x-transfer` | `targetKeys` | `update:targetKeys` |
 | `upload` | `x-upload` | `fileList` | `update:fileList` |
 
-The Element-parity aliases `autocomplete`, `date-picker`, `range-picker`, `time-picker`, `time-range-picker`, `checkbox`, `checkbox-group`, `switch`, `tree-select`, `select`, `input`, `textarea`, and `input-number` are also resolved. Do not pass a second `v-model` to a schema-managed field. For field rules, slots, and events, use the [schema forms reference](/components/forms).
+与 Element 包对齐的别名 `autocomplete`、`date-picker`、`range-picker`、`time-picker`、`time-range-picker`、`checkbox`、`checkbox-group`、`switch`、`tree-select`、`select`、`input`、`textarea` 和 `input-number` 也可以解析。Schema 管理的字段不要再传第二个 `v-model`。字段规则、插槽和事件请查看[表单 Schema 参考](/components/forms)。
 
-## Contract boundaries
+## 契约边界
 
-- A name matching an Ant Design Vue component does not guarantee byte-for-byte behavior; wrapper fields may normalize values or add schema props.
-- `Table` adds the package's column and pagination contract; see the [table reference](/components/table).
-- `message` and `notification` are framework services, not Vue components.
-- Public types are generated from the source declarations. If a prop is not in the type or this documentation, do not invent it.
-- For an upstream behavior, consult the Ant Design Vue documentation for the exact version installed by the consuming application.
+- 与 Ant Design Vue 同名不代表逐字节一致；包装字段可能归一化值或增加 Schema props。
+- `Table` 增加本包的列与分页契约，详见[表格参考](/components/table)。
+- `message` 和 `notification` 是框架服务，不是 Vue 组件。
+- 公共类型从源码声明生成；类型和文档中没有的 prop 不要自行臆造。
+- 对于上游行为，请以宿主应用实际安装版本的 Ant Design Vue 文档为准。

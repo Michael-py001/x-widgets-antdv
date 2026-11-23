@@ -1,27 +1,27 @@
-# Cross-library compatibility
+# 跨库兼容性
 
-`x-widgets-antdv` and `x-widgets-element-plus` share a goal—reusable Vue widgets—but render with different UI frameworks. Their source is maintained separately, so shared concepts do not imply a single cross-framework binary or identical framework-specific options.
+`x-widgets-antdv` 与 `x-widgets-element-plus` 有着共同目标——可复用的 Vue 控件——但二者基于不同的 UI 框架渲染。它们的源码独立维护，因此概念相通并不意味着存在跨框架的统一产物，也不意味着框架专属选项完全一致。
 
-## Shared concepts
+## 共通概念
 
-Both packages export `Input`, `InputNumber`, `RadioGroup`, `CheckboxGroup`, `Textarea`, `CustomForm`, `CustomFormItem`, `FormPage`, `SearchForm`, `ConfirmPopup`, `FormModal`, `Table`, and `Tag`. Compare the exported types before migrating; each package's `src/components.ts` is the source of truth for names.
+两个包都导出 `Input`、`InputNumber`、`RadioGroup`、`CheckboxGroup`、`Textarea`、`CustomForm`、`CustomFormItem`、`FormPage`、`SearchForm`、`ConfirmPopup`、`FormModal`、`Table` 与 `Tag`。迁移前请对比导出的类型；每个包的 `src/components.ts` 才是名称的唯一依据。
 
-| Area | Ant Design Vue package | Element Plus package |
+| 领域 | Ant Design Vue 包 | Element Plus 包 |
 | --- | --- | --- |
-| UI peer | `ant-design-vue` 4.x | `element-plus` 2.x |
-| Global base CSS | Ant Design Vue reset CSS + package CSS | Element Plus CSS + package CSS |
-| Form schema | `column` of `ColumnForFormItemType`; widget kinds use `el` / `type` | Same schema-first intent; types also support render-function slots and `display`/`required` field behavior. |
-| Form grouping | `FormPage` and `FormModal` consume field schemas; verify the component's wrapper props for the exact package. | `FormPage` groups fields in `formModel: FormModelBlock[]`; `SearchForm` uses a flat `column` array. |
-| Table engine | Ant Design Vue Table props/events/slots plus wrapper options. | Element Plus standard table (`Table` with `TableColumn` and pagination wrappers), plus a separate `TableVirtualized` for V2 / large datasets. |
-| Select options | Ant Design Vue control conventions plus wrapper modes. | Element Plus control conventions; no root `Select` export in this package version. |
-| Extras | `FunctionButton`, `GoBack`, `TabPage`, `DropdownButtonList`, `AreaPicker`, `CityPicker`. | `TableVirtualized`, `AreaCascader`, `LoadingProgress`, `Text`, and tooltip/confirm helpers. |
+| UI peer 依赖 | `ant-design-vue` 4.x | `element-plus` 2.x |
+| 全局基础 CSS | Ant Design Vue 重置 CSS + 本包 CSS | Element Plus CSS + 本包 CSS |
+| 表单 Schema | `ColumnForFormItemType` 的 `column`；控件种类使用 `el` / `type` | 同为 Schema 优先的设计；类型还支持渲染函数插槽以及字段的 `display` / `required` 行为。 |
+| 表单分组 | `FormPage` 与 `FormModal` 消费字段 schema；请核对相应包中组件的包装层 props。 | `FormPage` 在 `formModel: FormModelBlock[]` 中分组字段；`SearchForm` 使用扁平的 `column` 数组。 |
+| 表格引擎 | Ant Design Vue 表格的 props/事件/插槽，外加包装层选项。 | Element Plus 标准表格（`Table` 搭配 `TableColumn` 与分页包装组件），另有面向 V2 / 大数据集的 `TableVirtualized`。 |
+| 下拉选项 | Ant Design Vue 控件约定 + 包装层模式。 | Element Plus 控件约定；当前包版本没有根级 `Select` 导出。 |
+| 其他 | `FunctionButton`、`GoBack`、`TabPage`、`DropdownButtonList`、`AreaPicker`、`CityPicker`。 | `TableVirtualized`、`AreaCascader`、`LoadingProgress`、`Text`，以及 tooltip/confirm 辅助工具。 |
 
-## Migration checklist
+## 迁移清单
 
-1. Replace framework peer dependencies and load that framework's own CSS.
-2. Recheck package-root exports; similarly named exports may not exist in the other package.
-3. Recheck native props, events, slots, sizes, and pagination conventions against the target framework.
-4. Revalidate `formModel`, `column`, field `el`/`type`, options, and custom render slots with target package types.
-5. Re-test layouts and interactive controls in the target framework. CSS classes and theme tokens are not portable.
+1. 替换框架 peer 依赖，并加载目标框架自身的 CSS。
+2. 重新核对包根目录导出；名称相似的导出在另一个包中可能并不存在。
+3. 对照目标框架重新核对原生 props、事件、插槽、尺寸与分页约定。
+4. 用目标包的类型重新验证 `formModel`、`column`、字段的 `el`/`type`、选项与自定义渲染插槽。
+5. 在目标框架中重新测试布局与交互控件。CSS 类名与主题 token 不可直接移植。
 
-Do not alias one package as the other, combine both plugins in one app, or treat shared schema names as a promise of perfect behavioral parity. This page documents only the checked shared concepts; declarations are authoritative for each release.
+请勿将某个包起别名当作另一个包使用，勿在一个应用中同时组合两个插件，也不要把共通的 schema 名称视为行为完全一致保证。本页面仅记录已核实的共通概念；对各版本而言，类型声明才是权威依据。

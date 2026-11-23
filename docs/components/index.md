@@ -1,26 +1,26 @@
-# Exported components
+# 导出的组件
 
-These names are verified against `src/components.ts` and are the supported package-root entry points. Import them from `x-widgets-antdv`; deep imports are not a public API.
+以下名称已对照 `src/components.ts` 核实，是受支持的包根目录入口。请从 `x-widgets-antdv` 导入它们；深层路径导入不属于公开 API。
 
-## Ant Design Vue controls
+## Ant Design Vue 控件
 
-The package re-exports these controls and selected subcomponents from `ant-design-vue`:
+本包从 `ant-design-vue` 重新导出这些控件及部分子组件：
 
-`Affix`, `Alert`, `Anchor`, `App`, `AutoComplete`, `Avatar`, `Badge`, `Breadcrumb`, `Button`, `Calendar`, `Card`, `Carousel`, `Cascader`, `Checkbox`, `CheckboxGroup`, `Collapse`, `Col`, `Comment`, `ConfigProvider`, `DatePicker`, `Descriptions`, `DescriptionsItem`, `Divider`, `Drawer`, `Dropdown`, `Empty`, `Flex`, `FloatButton`, `Form`, `FormItem`, `FormItemRest`, `Image`, `ImagePreviewGroup`, `Input`, `InputSearch`, `InputNumber`, `Layout`, `List`, `Menu`, `MenuItem`, `Mentions`, `Modal`, `PageHeader`, `Pagination`, `Popconfirm`, `Popover`, `Progress`, `QRCode`, `Radio`, `RadioButton`, `RadioGroup`, `RangePicker`, `Rate`, `Result`, `Row`, `Segmented`, `Select`, `SelectOption`, `Skeleton`, `Slider`, `Space`, `Spin`, `Statistic`, `Steps`, `Switch`, `TabPane`, `Tabs`, `Tag`, `Textarea`, `TimePicker`, `TimeRangePicker`, `Timeline`, `Tooltip`, `Tour`, `Transfer`, `Tree`, `TreeSelect`, `Typography`, `Upload`, `Watermark`, `message`, and `notification`.
+`Affix`、`Alert`、`Anchor`、`App`、`AutoComplete`、`Avatar`、`Badge`、`Breadcrumb`、`Button`、`Calendar`、`Card`、`Carousel`、`Cascader`、`Checkbox`、`CheckboxGroup`、`Collapse`、`Col`、`Comment`、`ConfigProvider`、`DatePicker`、`Descriptions`、`DescriptionsItem`、`Divider`、`Drawer`、`Dropdown`、`Empty`、`Flex`、`FloatButton`、`Form`、`FormItem`、`FormItemRest`、`Image`、`ImagePreviewGroup`、`Input`、`InputSearch`、`InputNumber`、`Layout`、`List`、`Menu`、`MenuItem`、`Mentions`、`Modal`、`PageHeader`、`Pagination`、`Popconfirm`、`Popover`、`Progress`、`QRCode`、`Radio`、`RadioButton`、`RadioGroup`、`RangePicker`、`Rate`、`Result`、`Row`、`Segmented`、`Select`、`SelectOption`、`Skeleton`、`Slider`、`Space`、`Spin`、`Statistic`、`Steps`、`Switch`、`TabPane`、`Tabs`、`Tag`、`Textarea`、`TimePicker`、`TimeRangePicker`、`Timeline`、`Tooltip`、`Tour`、`Transfer`、`Tree`、`TreeSelect`、`Typography`、`Upload`、`Watermark`、`message` 与 `notification`。
 
-## Business widgets
+## 业务控件
 
-`ConfirmPopup`, `CustomConfigProvider`, `CustomForm`, `CustomFormItem`, `FormModal`, `FormPage`, `FunctionButton`, `GoBack`, `DropdownButtonList`, `SearchForm`, `TabPage`, `RangeInput`, `EditInput`, `CityPicker`, and `AreaPicker`.
+`ConfirmPopup`、`CustomConfigProvider`、`CustomForm`、`CustomFormItem`、`FormModal`、`FormPage`、`FunctionButton`、`GoBack`、`DropdownButtonList`、`SearchForm`、`TabPage`、`RangeInput`、`EditInput`、`CityPicker` 与 `AreaPicker`。
 
-`Table` is the Ant Design Vue table wrapper. Its `TableProps` type is also exported. The package also exports `ColumnForFormItemType`, `FormBlockSlotRender`, `FormBlockSlotRenderContext`, `FormItemSlotRender`, `FormItemSlotRenderContext`, `SearchFormProps`, `FunctionButtonProps`, and `FunctionButtonOptionsType`.
+`Table` 是 Ant Design Vue 表格的包装组件，其 `TableProps` 类型也会被导出。本包还导出 `ColumnForFormItemType`、`FormBlockSlotRender`、`FormBlockSlotRenderContext`、`FormItemSlotRender`、`FormItemSlotRenderContext`、`SearchFormProps`、`FunctionButtonProps` 与 `FunctionButtonOptionsType`。
 
-The schema-driven form also accepts `cascader`, `rate`, `slider`, `mentions`, `transfer`, and `upload` as `el` / `type` values (with `x-` aliases), alongside the existing controls and Element-parity aliases. See [schema forms](/components/forms) and [controls](/components/controls) for the value-binding details.
+Schema 驱动的表单除现有控件与 Element 对齐别名外，还接受 `cascader`、`rate`、`slider`、`mentions`、`transfer`、`upload` 作为 `el` / `type` 值（含 `x-` 别名）。值绑定细节见[表单 Schema](/components/forms)与[基础控件](/components/controls)。
 
-## Root utility exports
+## 包根工具导出
 
-The package root also exports `setFormdata(formData, name, value)` and `getValue(formData, name)` for reading and writing schema-bound values, plus the `FormFieldName` type (`string | [string, string]`). These are exported from `x-widgets-antdv`; the two-element form targets a nested property one level deep.
+包根目录还导出 `setFormdata(formData, name, value)` 和 `getValue(formData, name)`，用于读写 Schema 字段值，并导出 `FormFieldName` 类型（`string | [string, string]`）。请从 `x-widgets-antdv` 导入；二元素数组形式用于访问一层嵌套属性。
 
-## Common import pattern
+## 常见导入方式
 
 ```ts
 import {
@@ -36,8 +36,8 @@ import {
 import type { ColumnForFormItemType, SearchFormProps, TableProps } from 'x-widgets-antdv'
 ```
 
-## What the name means
+## 名称的含义
 
-A name matching an Ant Design Vue control is not guaranteed to be a byte-for-byte alias: form-aware wrappers such as `Input`, `Select`, `AutoComplete`, `RangePicker`, `TimePicker`, `Cascader`, `Rate`, `Slider`, `Mentions`, `Transfer`, and `Upload` bridge values into `CustomFormItem` and may add package-specific props. Use upstream Ant Design Vue documentation for upstream behavior and this library's typed exports for wrapper extensions. In particular, custom `Select` modes such as `single` / `multiple-enhance` are wrapper conventions, not Ant Design Vue modes.
+与 Ant Design Vue 控件同名的组件，并不保证是逐字节相同的别名：诸如 `Input`、`Select`、`AutoComplete`、`RangePicker`、`TimePicker`、`Cascader`、`Rate`、`Slider`、`Mentions`、`Transfer` 与 `Upload` 这类支持表单的包装组件会把值桥接到 `CustomFormItem`，并可能添加本包特有的 props。上游行为请参考 Ant Design Vue 官方文档，包装层扩展请参考本库带类型的导出。特别地，`single` / `multiple-enhance` 这类自定义 `Select` 模式是包装层的约定，并非 Ant Design Vue 的模式。
 
-See [controls](/components/controls), [schema forms](/components/forms), [table](/components/table), and [cross-library compatibility](/components/compatibility) for the custom API contracts.
+自定义 API 契约详见[基础控件](/components/controls)、[表单 Schema](/components/forms)、[表格](/components/table)与[跨库兼容性](/components/compatibility)。
