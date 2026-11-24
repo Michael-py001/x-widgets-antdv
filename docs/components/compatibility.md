@@ -13,7 +13,8 @@
 | 表单 Schema | `ColumnForFormItemType` 的 `column`；控件种类使用 `el` / `type` | 同为 Schema 优先的设计；类型还支持渲染函数插槽以及字段的 `display` / `required` 行为。 |
 | 表单分组 | `FormPage` 与 `FormModal` 消费字段 schema；请核对相应包中组件的包装层 props。 | `FormPage` 在 `formModel: FormModelBlock[]` 中分组字段；`SearchForm` 使用扁平的 `column` 数组。 |
 | 表格引擎 | Ant Design Vue 表格的 props/事件/插槽，外加包装层选项。 | Element Plus 标准表格（`Table` 搭配 `TableColumn` 与分页包装组件），另有面向 V2 / 大数据集的 `TableVirtualized`。 |
-| 下拉选项 | Ant Design Vue 控件约定 + 包装层模式。 | Element Plus 控件约定；当前包版本没有根级 `Select` 导出。 |
+| 共有表单控件 | `Input`、`InputPassword`、`InputSearch`、`Textarea`、`InputNumber`、`Select`、`TreeSelect`、`RadioGroup`、`Checkbox`、`CheckboxGroup`、`Switch`、`DatePicker`、`RangePicker`、`TimePicker`、`TimeRangePicker`、`AutoComplete`、`Cascader`、`Rate`、`Slider`、`Mentions`、`Transfer`、`Upload`、`CityPicker`、`AreaPicker`、`RangeInput`、`Text`；Schema `type` 均支持裸名与 `x-` 别名。 | 同名控件（含 `transfer`、`upload`，另有本包独有的 `color-picker`）；autocomplete 导出名为 `Autocomplete`。 |
+| 框架专有控件 | 无 `ColorPicker`（`ant-design-vue` 4.x 上游没有该控件，请勿在本包 Schema 中声明）。 | `ColorPicker`（Element Plus 上游提供）。 |
 | 其他 | `FunctionButton`、`GoBack`、`TabPage`、`DropdownButtonList`、`AreaPicker`、`CityPicker`。 | `TableVirtualized`、`AreaCascader`、`LoadingProgress`、`Text`，以及 tooltip/confirm 辅助工具。 |
 
 ## 迁移清单

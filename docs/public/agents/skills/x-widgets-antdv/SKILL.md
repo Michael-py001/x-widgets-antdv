@@ -28,7 +28,8 @@ The runtime root is `src/index.ts` → `src/components.ts`. Import public APIs f
 
 - Include both `ant-design-vue/dist/reset.css` and `x-widgets-antdv/style.css` once in the application entry.
 - Treat Vue, Ant Design Vue, the icon package, and Vue Router as peer dependencies; `GoBack` is the router-dependent widget.
-- For form schemas, use the exported `ColumnForFormItemType`; check available `el`/`type` values and wrapper props before composing fields.
+- For form schemas, use the exported `ColumnForFormItemType`; check available `el`/`type` values and wrapper props before composing fields. `type` accepts bare names and `x-` aliases that resolve to the same adapter, matching `x-widgets-element-plus` naming; schema slots additionally accept VNode render callbacks (for example `formSlot: ({ formData }) => h('strong', formData.name)`).
+- `transfer` binds selected keys via `targetKeys`; `upload` binds the controlled `fileList`. This package has no `color-picker` (`ant-design-vue` 4 has no upstream ColorPicker).
 - Keep API access, request state, and domain validation in the consuming application. The widgets bind/render supplied data; they are not a data-fetching layer.
 - Use Ant Design Vue documentation for native behavior and this package's types/docs for wrapper additions. Custom select modes are not upstream modes.
 - Do not invent exports. If the desired capability is missing, say so and propose the smallest source-backed change.
