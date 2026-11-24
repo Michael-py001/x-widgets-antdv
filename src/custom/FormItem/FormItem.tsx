@@ -21,6 +21,7 @@ import Slider from '../../antdv/Slider/BasicSlider'
 import Mentions from '../../antdv/Mentions/BasicMentions'
 import Transfer from '../../antdv/Transfer/BasicTransfer'
 import Upload from '../../antdv/Upload/BasicUpload'
+import Segmented from '../../antdv/Segmented/BasicSegmented'
 import TimePicker from '../../antdv/TimePicker/BasicTimePicker'
 import DatePicker from '../../antdv/DatePicker/BasicDatePicker'
 import TimeRangePicker from '../../antdv/TimeRangePicker/BasicTimeRangePicker'
@@ -149,6 +150,8 @@ const FormItemComponent = defineComponent<CustomFormItemProps>({
             transfer: Transfer,
             'x-upload': Upload,
             upload: Upload,
+            'x-segmented': Segmented,
+            segmented: Segmented,
             'range-input': RangeInput,
         }
 

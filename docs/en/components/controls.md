@@ -92,6 +92,7 @@ The schema types added for full form-control parity are:
 | `mentions` | `x-mentions` | `value` | `update:value` |
 | `transfer` | `x-transfer` | `targetKeys` | `update:targetKeys` |
 | `upload` | `x-upload` | `fileList` | `update:fileList` |
+| `segmented` | `x-segmented` | `value` | `update:value` |
 
 The Element-parity aliases `autocomplete`, `date-picker`, `range-picker`, `time-picker`, `time-range-picker`, `checkbox`, `checkbox-group`, `switch`, `tree-select`, `select`, `input`, `textarea`, and `input-number` are also resolved. Do not pass a second `v-model` to a schema-managed field. For field rules, slots, and events, use the [schema forms reference](/en/components/forms).
 

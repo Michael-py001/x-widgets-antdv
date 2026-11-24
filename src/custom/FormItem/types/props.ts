@@ -59,6 +59,8 @@ export type formItemTypes =
     | 'transfer'
     | 'x-upload'
     | 'upload'
+    | 'x-segmented'
+    | 'segmented'
     | 'range-input'
     | 'c-CityPicker'
     | 'c-text'

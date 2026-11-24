@@ -50,6 +50,7 @@ describe('CustomFormItem', () => {
     { type: 'mentions', name: 'comment', initial: '', next: '@someone hi', nativeName: 'AMentions', valueProp: 'value', updateEvent: 'update:value' },
     { type: 'transfer', name: 'assigned', initial: [], next: ['u1'], nativeName: 'ATransfer', valueProp: 'targetKeys', updateEvent: 'update:targetKeys' },
     { type: 'upload', name: 'files', initial: [], next: [{ uid: '1' }], nativeName: 'AUpload', valueProp: 'fileList', updateEvent: 'update:fileList' },
+    { type: 'segmented', name: 'mode', initial: 'a', next: 'b', nativeName: 'ASegmented', valueProp: 'value', updateEvent: 'update:value' },
   ]
 
   it.each(bridgeCases)('$type writes its value back to formData', ({ type, name, initial, next, nativeName, valueProp, updateEvent }) => {
@@ -73,6 +74,7 @@ describe('CustomFormItem', () => {
       { type: 'x-mentions', nativeName: 'AMentions' },
       { type: 'x-transfer', nativeName: 'ATransfer' },
       { type: 'x-upload', nativeName: 'AUpload' },
+      { type: 'x-segmented', nativeName: 'ASegmented' },
       { type: 'autocomplete', nativeName: 'AutoComplete' },
     ]
     for (const { type, nativeName } of aliases) {

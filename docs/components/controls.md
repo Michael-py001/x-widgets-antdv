@@ -91,6 +91,7 @@ const columns: ColumnForFormItemType[] = [
 | `mentions` | `x-mentions` | `value` | `update:value` |
 | `transfer` | `x-transfer` | `targetKeys` | `update:targetKeys` |
 | `upload` | `x-upload` | `fileList` | `update:fileList` |
+| `segmented` | `x-segmented` | `value` | `update:value` |
 
 与 Element 包对齐的别名 `autocomplete`、`date-picker`、`range-picker`、`time-picker`、`time-range-picker`、`checkbox`、`checkbox-group`、`switch`、`tree-select`、`select`、`input`、`textarea` 和 `input-number` 也可以解析。Schema 管理的字段不要再传第二个 `v-model`。字段规则、插槽和事件请查看[表单 Schema 参考](/components/forms)。
 

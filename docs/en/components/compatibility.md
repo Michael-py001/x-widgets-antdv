@@ -13,9 +13,12 @@ Both packages export `Input`, `InputNumber`, `RadioGroup`, `CheckboxGroup`, `Tex
 | Form schema | `column` of `ColumnForFormItemType`; widget kinds use `el` / `type` | Same schema-first intent; types also support render-function slots and `display`/`required` field behavior. |
 | Form grouping | `FormPage` and `FormModal` consume field schemas; verify the component's wrapper props for the exact package. | `FormPage` groups fields in `formModel: FormModelBlock[]`; `SearchForm` uses a flat `column` array. |
 | Table engine | Ant Design Vue Table props/events/slots plus wrapper options. | Element Plus standard table (`Table` with `TableColumn` and pagination wrappers), plus a separate `TableVirtualized` for V2 / large datasets. |
-| Shared form controls | `Input`, `InputPassword`, `InputSearch`, `Textarea`, `InputNumber`, `Select`, `TreeSelect`, `RadioGroup`, `Checkbox`, `CheckboxGroup`, `Switch`, `DatePicker`, `RangePicker`, `TimePicker`, `TimeRangePicker`, `AutoComplete`, `Cascader`, `Rate`, `Slider`, `Mentions`, `Transfer`, `Upload`, `CityPicker`, `AreaPicker`, `RangeInput`, `Text`; schema `type` accepts both bare names and `x-` aliases. | The same controls (including `transfer` and `upload`, plus this package's own `color-picker`); autocomplete export is `Autocomplete`. |
+| Shared form controls | `Input`, `InputPassword`, `InputSearch`, `Textarea`, `InputNumber`, `Select`, `TreeSelect`, `RadioGroup`, `Checkbox`, `CheckboxGroup`, `Switch`, `DatePicker`, `RangePicker`, `TimePicker`, `TimeRangePicker`, `AutoComplete`, `Cascader`, `Rate`, `Slider`, `Mentions`, `Transfer`, `Upload`, `Segmented`, `CityPicker`, `AreaPicker`, `RangeInput`, `Text`; schema `type` accepts both bare names and `x-` aliases. | The same controls (including `transfer` and `upload`, plus this package's own `color-picker`); autocomplete export is `Autocomplete`. |
 | Framework-only control | No `ColorPicker` (`ant-design-vue` 4.x has no upstream equivalent; do not declare `color-picker` in this package's schema). | `ColorPicker` (from Element Plus upstream). |
 | Extras | `FunctionButton`, `GoBack`, `TabPage`, `DropdownButtonList`, `AreaPicker`, `CityPicker`. | `TableVirtualized`, `AreaCascader`, `LoadingProgress`, `Text`, and tooltip/confirm helpers. |
+
+
+Element Plus additionally offers `input-otp`, `input-tag`, and `time-select` form controls (from its upstream; Ant Design Vue 4 has no equivalents). Check these explicitly when porting schemas; do not assume interchangeability.
 
 ## Migration checklist
 

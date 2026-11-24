@@ -1,24 +1,36 @@
-import { defineComponent, defineAsyncComponent } from 'vue'
-import { XSegmentedProps } from './types/props'
+import { defineComponent } from 'vue'
+import { Segmented } from 'ant-design-vue'
+import type { XSegmentedProps } from './types/props'
+import { basicFormProps } from './types/basicFormProps'
+import { setFormdata, getValue } from '../../utils/handleFormData'
 
-let Component = null
-const Segmented = defineAsyncComponent(() => import('ant-design-vue/es/segmented'))
+export default defineComponent<XSegmentedProps>({
+    name: 'XSegmented',
 
-if (Segmented) {
-    Component = defineComponent<XSegmentedProps>({
-        name: 'XSegmented',
-
-        inheritAttrs: true, // TAG: Props Reactive
-        setup(props, { attrs, slots }) {
-            return () => {
-                return (
-                    <Segmented {...attrs} {...props}>
-                        {{ ...slots }}
-                    </Segmented>
-                )
+    inheritAttrs: true, // TAG: Props Reactive
+    props: {
+        ...Segmented.props,
+        ...basicFormProps(),
+    },
+    setup(props, { attrs, slots }) {
+        const { formData, name, event } = props
+        const { _is_x_form_item } = attrs // 经过custom/FormItem处理的标志
+        let basicProps = {}
+        return () => {
+            // 对于经过custom/FormItem处理的表单项，额外处理
+            if (_is_x_form_item && formData) {
+                basicProps = {
+                    'onUpdate:value': (value: string | number) => {
+                        setFormdata(formData, name, value)
+                    },
+                    value: getValue(formData, name),
+                }
             }
-        },
-    })
-}
-
-export default Component
+            return (
+                <Segmented {...attrs} {...props} {...basicProps} {...event}>
+                    {{ ...slots }}
+                </Segmented>
+            )
+        }
+    },
+})
