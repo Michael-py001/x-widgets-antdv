@@ -83,6 +83,12 @@ Try searching, creating a project, then editing or viewing its details to see on
 
 <ClientOnly><AntdvRealCaseDemo /></ClientOnly>
 
+### Control gallery
+
+The scenarios above mostly use text and select fields. Here 20+ form controls are written into **one `column` schema** and rendered by `FormPage` into a single `formData`; editing any control updates the model below live. This is schema bridging, not importing each component and binding its own `v-model`.
+
+<ClientOnly><AntdvControlGallery /></ClientOnly>
+
 ## Form-aware controls
 
 `Input`, `Select`, `AutoComplete`, `RangePicker`, `TimePicker`, `Cascader`, `Rate`, `Slider`, `Mentions`, `Transfer`, `Upload`, and related fields can be rendered by `CustomFormItem`, `FormPage`, or `SearchForm`. In that mode, the schema owns the field name and the component receives the form bridge internally:

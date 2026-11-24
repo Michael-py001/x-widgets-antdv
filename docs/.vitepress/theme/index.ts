@@ -2,6 +2,7 @@ import DefaultTheme from 'vitepress/theme'
 import ControlDemo from '../components/ControlDemo.vue'
 import AdvancedDemo from '../components/AdvancedDemo.vue'
 import RealCaseDemo from '../components/RealCaseDemo.vue'
+import ControlGallery from '../components/ControlGallery.vue'
 import './custom.css'
 
 export default {
@@ -11,5 +12,6 @@ export default {
     app.component('AntdvControlDemo', ControlDemo)
     app.component('AntdvAdvancedDemo', AdvancedDemo)
     app.component('AntdvRealCaseDemo', RealCaseDemo)
+    app.component('AntdvControlGallery', ControlGallery)
   },
 }

@@ -82,6 +82,12 @@ const statusOptions = [
 
 <ClientOnly><AntdvRealCaseDemo /></ClientOnly>
 
+### 控件画廊
+
+上面三段场景只用到文本、下拉等基础控件。这里把 20+ 种表单控件写进**同一份 `column` schema**，交给 `FormPage` 桥接渲染，值统一写进一个 `formData`；修改任意控件，下方模型实时同步。不是逐个组件 `import` 后各绑一个 `v-model`。
+
+<ClientOnly><AntdvControlGallery /></ClientOnly>
+
 ## 表单适配控件
 
 `Input`、`Select`、`AutoComplete`、`RangePicker`、`TimePicker`、`Cascader`、`Rate`、`Slider`、`Mentions`、`Transfer`、`Upload` 等字段可以由 `CustomFormItem`、`FormPage` 或 `SearchForm` 渲染。此时字段名由 Schema 管理，组件内部接收表单桥接：
