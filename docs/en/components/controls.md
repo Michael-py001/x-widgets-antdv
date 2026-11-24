@@ -59,9 +59,17 @@ The package does not fetch options or own request state. Keep options, loading s
 
 ## Interactive example
 
-The controls below use local reactive state; change the keyword or status and apply it to update the summary.
+### Basic usage
+
+Each control is imported from the package root and bound to local state through its own `v-model`. Change any control and the "Live form state" panel updates; "Reset state" returns to the initial values.
 
 <ClientOnly><AntdvControlDemo /></ClientOnly>
+
+### Advanced usage
+
+One field `schema` renders a query form and applies its conditions to a local data table on submit. Try a title keyword, a state, or a minimum rating, then click "Search"; in production, swap the renderer for `SearchForm` (see the schema forms docs).
+
+<ClientOnly><AntdvAdvancedDemo /></ClientOnly>
 
 ## Form-aware controls
 
