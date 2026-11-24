@@ -3,7 +3,7 @@ import { DatePicker } from 'ant-design-vue'
 import { basicFormProps, BasicFormProps } from './types/basicFormProps'
 import { setFormdata, getValue } from '../../utils/handleFormData'
 import './styles/reset.less'
-import zhCN from 'ant-design-vue/es/locale/zh_CN'
+import datePickerZhCN from './locale/zhCN'
 
 export default defineComponent({
     name: 'XDatePicker',
@@ -56,7 +56,7 @@ export default defineComponent({
                     {...props}
                     {...basicProps}
                     {...event}
-                    locale={zhCN.DatePicker}
+                    locale={datePickerZhCN}
                 >
                     {{ ...slots }}
                 </DatePicker>

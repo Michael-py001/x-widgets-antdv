@@ -3,7 +3,7 @@ import { RangePicker } from 'ant-design-vue'
 import { XRangePickerProps } from './types/props'
 import { basicFormProps } from './types/basicFormProps'
 import { setFormdata, getValue } from '../../utils/handleFormData'
-import zhCN from 'ant-design-vue/es/locale/zh_CN'
+import datePickerZhCN from '../DatePicker/locale/zhCN'
 
 const NativeRangePicker = RangePicker as any
 
@@ -58,7 +58,7 @@ export default defineComponent({
                     {...resetProps}
                     {...basicProps}
                     {...event}
-                    locale={zhCN.DatePicker}
+                    locale={datePickerZhCN}
                     presets={presets}
                 >
                     {{ ...slots }}
