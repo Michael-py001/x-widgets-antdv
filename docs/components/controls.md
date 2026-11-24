@@ -70,6 +70,18 @@ const statusOptions = [
 
 <ClientOnly><AntdvAdvancedDemo /></ClientOnly>
 
+### 真实案例简化
+
+把原项目三个页面的 composable 简化成一套可操作的 Demo，展示 Schema 桥接在真实场景里的用法：
+
+1. **项目管理 · 列表查询**（`useBasicProjectSearchForm`）：`colspan=12` 两列查询表单；提交后按同一份 `formData` 过滤表格。
+2. **新增 / 编辑弹窗**（`useBasicProjectFormModal`）：详情、编辑、新增共用一套 `formModel`，`detail` 模式仅切换 `disabled`。
+3. **测算工作台 · 行内入参**（`useGeneralCostEditForm`）：`inline` 布局下 `colspan` 不生效，字段用 `formSlot` 渲染函数做成点击上传框。
+
+试着查询、新增项目、再编辑或查看详情，体会同一套字段契约在三种场景的复用。
+
+<ClientOnly><AntdvRealCaseDemo /></ClientOnly>
+
 ## 表单适配控件
 
 `Input`、`Select`、`AutoComplete`、`RangePicker`、`TimePicker`、`Cascader`、`Rate`、`Slider`、`Mentions`、`Transfer`、`Upload` 等字段可以由 `CustomFormItem`、`FormPage` 或 `SearchForm` 渲染。此时字段名由 Schema 管理，组件内部接收表单桥接：

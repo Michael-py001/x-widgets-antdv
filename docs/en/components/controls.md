@@ -71,6 +71,18 @@ Switch between "multi-column / split / inline": the same field contract renders 
 
 <ClientOnly><AntdvAdvancedDemo /></ClientOnly>
 
+### Real-page case
+
+Three composables from real pages, reduced to one interactive demo that shows schema bridging in production scenarios:
+
+1. **Project management · list query** (`useBasicProjectSearchForm`): a two-column (`colspan=12`) query form; submitting filters the table from the same `formData`.
+2. **Create / edit modal** (`useBasicProjectFormModal`): detail, edit and create share one `formModel`; detail mode only flips `disabled`.
+3. **Cost workbench · inline inputs** (`useGeneralCostEditForm`): `colspan` has no effect in an `inline` layout; a `formSlot` render function turns a field into a click-to-upload box.
+
+Try searching, creating a project, then editing or viewing its details to see one field contract reused across all three scenarios.
+
+<ClientOnly><AntdvRealCaseDemo /></ClientOnly>
+
 ## Form-aware controls
 
 `Input`, `Select`, `AutoComplete`, `RangePicker`, `TimePicker`, `Cascader`, `Rate`, `Slider`, `Mentions`, `Transfer`, `Upload`, and related fields can be rendered by `CustomFormItem`, `FormPage`, or `SearchForm`. In that mode, the schema owns the field name and the component receives the form bridge internally:
