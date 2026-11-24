@@ -79,7 +79,7 @@ function onReset(values: typeof filters): void {
             <td>{{ row.projectName }}</td>
             <td>{{ row.ownerUnit }}</td>
             <td>{{ row.projectType }}</td>
-            <td><Tag :color="row.stage === '已发布' ? 'green' : row.stage === '草稿' ? 'blue' : 'default'">{{ row.stage }}</Tag></td>
+            <td><Tag :text="row.stage" :color="row.stage === '已发布' ? 'green' : row.stage === '草稿' ? 'blue' : 'default'" /></td>
           </tr>
           <tr v-if="result.length === 0"><td colspan="4" class="empty">没有匹配的记录</td></tr>
         </tbody>
