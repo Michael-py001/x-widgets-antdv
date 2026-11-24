@@ -84,7 +84,7 @@ const statusOptions = [
 
 ### 控件画廊
 
-上面三段场景只用到文本、下拉等基础控件。这里把 20+ 种表单控件写进**同一份 `column` schema**，交给 `FormPage` 桥接渲染，值统一写进一个 `formData`；修改任意控件，下方模型实时同步。不是逐个组件 `import` 后各绑一个 `v-model`。
+上面三段场景只用到文本、下拉等基础控件。这里把 14 种表单控件写进**同一份 `column` schema**，交给 `FormPage` 桥接渲染，值统一写进一个 `formData`；修改任意控件，下方模型实时同步。不是逐个组件 `import` 后各绑一个 `v-model`。
 
 <ClientOnly><AntdvControlGallery /></ClientOnly>
 

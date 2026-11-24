@@ -85,7 +85,7 @@ Try searching, creating a project, then editing or viewing its details to see on
 
 ### Control gallery
 
-The scenarios above mostly use text and select fields. Here 20+ form controls are written into **one `column` schema** and rendered by `FormPage` into a single `formData`; editing any control updates the model below live. This is schema bridging, not importing each component and binding its own `v-model`.
+The scenarios above mostly use text and select fields. Here 14 form controls are written into **one `column` schema** and rendered by `FormPage` into a single `formData`; editing any control updates the model below live. This is schema bridging, not importing each component and binding its own `v-model`.
 
 <ClientOnly><AntdvControlGallery /></ClientOnly>
 
