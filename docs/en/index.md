@@ -30,3 +30,5 @@ Built for Vue 3 applications already using Ant Design Vue 4. Load Ant Design Vue
 
 This is a separate UI package from `x-widgets-element-plus`; the two frameworks, style systems, and component-specific behavior are not interchangeable.
 
+<ShowcaseGallery />
+

@@ -2,6 +2,8 @@
 import { computed, reactive, ref } from 'vue'
 import { SearchForm, Tag } from 'x-widgets-antdv'
 import type { ColumnForFormItemType } from 'x-widgets-antdv'
+import CodeBlock from './CodeBlock.vue'
+import demoSource from './ControlDemo.vue?raw'
 import 'ant-design-vue/dist/reset.css'
 
 /**
@@ -85,6 +87,8 @@ function onReset(values: typeof filters): void {
         </tbody>
       </table>
     </div>
+
+    <CodeBlock :code="demoSource" />
   </div>
 </template>
 

@@ -10,6 +10,8 @@
 import { computed, h, reactive, ref } from 'vue'
 import { SearchForm, FormModal, FormPage, Tag } from 'x-widgets-antdv'
 import type { ColumnForFormItemType, FormItemSlotRenderContext } from 'x-widgets-antdv'
+import CodeBlock from './CodeBlock.vue'
+import demoSource from './RealCaseDemo.vue?raw'
 import 'ant-design-vue/dist/reset.css'
 
 /** 与 Element 版保持一致的本地区块类型（本包未单独导出 FormModelBlock 类型名）。 */
@@ -239,7 +241,7 @@ const inlineDemoModel: FormBlock[] = [{ column: inlineWithUpload }]
       <p v-if="savedMessage" class="saved">{{ savedMessage }}</p>
       <FormModal v-model:show="modalVisible" :modal-title="modalTitle"
         :form-model="modalSchema" :form-data="formModel" :disabled="modalDisabled"
-        layout="horizontal" label-width="96px" modal-width="680px"
+        layout="horizontal" label-width="96px" modal-width="680px" :gutter="[24, 12]"
         @confirm="onConfirm" />
     </section>
 
@@ -251,6 +253,8 @@ const inlineDemoModel: FormBlock[] = [{ column: inlineWithUpload }]
         layout="inline" label-width="92px" />
       <p class="x-note">当前入参：{{ JSON.stringify(inlineForm) }}</p>
     </section>
+
+    <CodeBlock :code="demoSource" />
   </div>
 </template>
 

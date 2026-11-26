@@ -9,6 +9,8 @@
 import { computed, reactive } from 'vue'
 import { FormPage, Tag } from 'x-widgets-antdv'
 import type { ColumnForFormItemType, FormModelBlock } from 'x-widgets-antdv'
+import CodeBlock from './CodeBlock.vue'
+import demoSource from './ControlGallery.vue?raw'
 import 'ant-design-vue/dist/reset.css'
 
 const formData = reactive<Record<string, any>>({
@@ -88,6 +90,8 @@ const entries = computed(() => Object.entries(formData).map(([key, value]) => ({
         <Tag :text="'text 只读'" color="red" />
       </div>
     </div>
+
+    <CodeBlock :code="demoSource" />
   </div>
 </template>
 

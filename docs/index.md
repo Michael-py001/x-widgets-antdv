@@ -29,3 +29,5 @@ features:
 为已使用 Ant Design Vue 4 的 Vue 3 应用而构建。加载 Ant Design Vue 的重置样式表与本包的样式表，然后组合使用[已导出的组件](/components/)——它们既接受上游的 props，也遵循本包特有的包装层约定。
 
 本包与 `x-widgets-element-plus` 是不同的 UI 包；两者的框架、样式体系以及组件特有的行为均不可互换。
+
+<ShowcaseGallery />
