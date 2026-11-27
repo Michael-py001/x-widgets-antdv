@@ -284,7 +284,7 @@ const props = defineProps({
     // 字段垂直间隔
     verticalGap: {
         type: [String, Number],
-        default: '0',
+        default: '8',
     },
     // 表单容器多余高度
     extraHeight: {
@@ -478,7 +478,8 @@ defineExpose({
             bottom: 0;
             left: 0;
             flex: 1;
-            background-color: #fff;
+            // 跟随宿主主题（如文档站的暗黑模式），避免硬编码白底。
+            background-color: var(--vp-c-bg-soft, #fff);
             width: 100%;
             z-index: 8;
         }

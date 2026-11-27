@@ -1,12 +1,28 @@
 <script setup lang="ts">
-/** 示例源码折叠展示：与 antdv.com 的「显示代码」一致，默认收起。 */
-defineProps<{ code: string }>()
+import { onMounted, ref, watch } from 'vue'
+import { codeToHtml } from 'shiki'
+
+/** 示例源码折叠展示：与 antdv.com 的「显示代码」一致，默认收起；用 Shiki 做语法高亮。 */
+const props = defineProps<{ code: string }>()
+
+const html = ref('')
+async function highlight(code: string) {
+  html.value = await codeToHtml(code, {
+    lang: 'vue',
+    themes: { light: 'github-light', dark: 'github-dark' },
+    defaultColor: false,
+  })
+}
+onMounted(() => highlight(props.code))
+watch(() => props.code, highlight)
 </script>
 
 <template>
   <details class="code-block">
     <summary class="code-block__toggle">显示代码</summary>
-    <pre class="code-block__pre"><code>{{ code }}</code></pre>
+    <!-- vp-code 让 VitePress 现有的明暗色规则（--shiki-light / --shiki-dark）生效。 -->
+    <div v-if="html" class="vp-code code-block__pre" v-html="html" />
+    <pre v-else class="code-block__pre"><code>{{ code }}</code></pre>
   </details>
 </template>
 

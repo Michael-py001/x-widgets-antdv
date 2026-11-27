@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue'
-import { SearchForm, Tag } from 'x-widgets-antdv'
-import type { ColumnForFormItemType } from 'x-widgets-antdv'
+import { SearchForm, Table, Tag } from 'x-widgets-antdv'
+import type { ColumnForFormItemType, TableProps } from 'x-widgets-antdv'
 import CodeBlock from './CodeBlock.vue'
 import demoSource from './ControlDemo.vue?raw'
 import 'ant-design-vue/dist/reset.css'
@@ -14,11 +14,11 @@ import 'ant-design-vue/dist/reset.css'
 const filters = reactive({ projectName: '', ownerUnit: '', projectType: '' })
 
 const columns: ColumnForFormItemType[] = [
-  { name: 'projectName', label: '项目名称', el: 'input', colspan: 6,
+  { name: 'projectName', label: '项目名称', el: 'input', colspan: 12,
     props: { allowClear: true, placeholder: '输入项目名称' } },
-  { name: 'ownerUnit', label: '业主单位', el: 'input', colspan: 6,
+  { name: 'ownerUnit', label: '业主单位', el: 'input', colspan: 12,
     props: { allowClear: true, placeholder: '输入业主单位' } },
-  { name: 'projectType', label: '项目类型', el: 'select', colspan: 6,
+  { name: 'projectType', label: '项目类型', el: 'select', colspan: 12,
     options: [
       { label: '全部', value: '' },
       { label: '燃机', value: 'gas' },
@@ -33,6 +33,13 @@ const records = [
   { key: '2', projectName: '特高压线路评估', ownerUnit: '国网设计院', projectType: 'grid', stage: '草稿' },
   { key: '3', projectName: '近海风电场测算', ownerUnit: '中广核', projectType: 'offshore', stage: '已发布' },
   { key: '4', projectName: '燃机改扩建估算', ownerUnit: '华能', projectType: 'gas', stage: '已归档' },
+]
+
+const resultColumns: TableProps['columns'] = [
+  { title: '项目名称', dataIndex: 'projectName', key: 'projectName' },
+  { title: '业主单位', dataIndex: 'ownerUnit', key: 'ownerUnit' },
+  { title: '类型', dataIndex: 'projectType', key: 'projectType' },
+  { title: '状态', dataIndex: 'stage', key: 'stage' },
 ]
 
 const applied = ref({ ...filters })
@@ -51,6 +58,9 @@ function onReset(values: typeof filters): void {
   applied.value = { ...values }
   runs.value += 1
 }
+function stageColor(stage: string): string {
+  return stage === '已发布' ? 'green' : stage === '草稿' ? 'blue' : 'default'
+}
 </script>
 
 <template>
@@ -63,8 +73,7 @@ function onReset(values: typeof filters): void {
     <SearchForm
       :column="columns"
       :form-data="filters"
-      layout="horizontal"
-      label-width="90px"
+      :label-col="{ style: { minWidth: '76px' } }"
       @search="onSearch"
       @reset="onReset"
     />
@@ -74,18 +83,11 @@ function onReset(values: typeof filters): void {
         <strong>查询结果</strong>
         <span>{{ result.length }} 条 · 第 {{ runs }} 次查询</span>
       </div>
-      <table>
-        <thead><tr><th>项目名称</th><th>业主单位</th><th>类型</th><th>状态</th></tr></thead>
-        <tbody>
-          <tr v-for="row in result" :key="row.key">
-            <td>{{ row.projectName }}</td>
-            <td>{{ row.ownerUnit }}</td>
-            <td>{{ row.projectType }}</td>
-            <td><Tag :text="row.stage" :color="row.stage === '已发布' ? 'green' : row.stage === '草稿' ? 'blue' : 'default'" /></td>
-          </tr>
-          <tr v-if="result.length === 0"><td colspan="4" class="empty">没有匹配的记录</td></tr>
-        </tbody>
-      </table>
+      <Table :columns="resultColumns" :data-source="result" :pagination="false" :auto-srcoll-height="false" size="small">
+        <template #stage="{ text }">
+          <Tag :color="stageColor(text)">{{ text }}</Tag>
+        </template>
+      </Table>
     </div>
 
     <CodeBlock :code="demoSource" />
@@ -102,9 +104,4 @@ function onReset(values: typeof filters): void {
 .result__head { display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin-bottom:10px; }
 .result__head strong { font-size:14px; }
 .result__head span { font-size:12px; color:var(--vp-c-text-2); }
-table { width:100%; border-collapse:collapse; font-size:13px; }
-th,td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--vp-c-divider); }
-th { color:var(--vp-c-text-2); font-weight:600; }
-td.empty { text-align:center; color:var(--vp-c-text-2); }
-@media (max-width:640px){ th,td { padding:6px; font-size:12px; } }
 </style>

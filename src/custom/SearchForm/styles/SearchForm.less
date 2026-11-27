@@ -1,8 +1,10 @@
 .x-search-form {
     display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
     justify-content: space-between;
-    align-items: center;
     position: relative;
+    width: 100%;
     margin-bottom: 22px;
     padding-bottom: 22px;
     border-bottom: 1px solid #e4e4e4;
@@ -35,9 +37,8 @@
     // 表单
     &-field {
         flex: 1;
-        height: 32px;
-        // padding: 0 6px 0px;
-        overflow: hidden;
+        min-width: 0;
+        // 高度交给内容撑开，不再固定 32px + overflow:hidden（会把第二行字段裁掉、挤成一行）。
         transition: height 0.3s;
         &.showMore {
             height: auto;
@@ -49,11 +50,18 @@
         display: flex;
         flex-grow: 0;
         padding-left: 10px;
+        align-items: center;
         // min-width: 170px;
         button {
             &:first-child {
                 margin-right: 10px;
             }
         }
+    }
+    // inline 布局下按钮作为 Row 的最后一列，跟随控件同行显示。
+    &-inline-btns {
+        display: flex;
+        align-items: center;
+        flex: none;
     }
 }

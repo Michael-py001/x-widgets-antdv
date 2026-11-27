@@ -83,11 +83,11 @@ const entries = computed(() => Object.entries(formData).map(([key, value]) => ({
         </div>
       </div>
       <div class="model-view__legend">
-        <Tag :text="'input / textarea'" color="blue" />
-        <Tag :text="'select / radio / checkbox'" color="green" />
-        <Tag :text="'date / range / rate / slider'" color="cyan" />
-        <Tag :text="'segmented'" color="orange" />
-        <Tag :text="'text 只读'" color="red" />
+        <Tag color="blue">input / textarea</Tag>
+        <Tag color="green">select / radio / checkbox</Tag>
+        <Tag color="cyan">date / range / rate / slider</Tag>
+        <Tag color="orange">segmented</Tag>
+        <Tag color="red">text 只读</Tag>
       </div>
     </div>
 

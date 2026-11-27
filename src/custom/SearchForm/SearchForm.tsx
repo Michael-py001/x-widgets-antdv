@@ -25,6 +25,8 @@ export default defineComponent<SearchFormProps>({
         const formRef = ref()
         const wrapperRef = ref()
         const compFormData: FormDataType = computed(() => props.formData)
+        // inline 布局时按钮跟随控件同行渲染；其他布局把按钮放到表单下方，与 element-plus 包行为一致。
+        const isInline = computed(() => props.layout === 'inline')
         const {
             createSearchFormRules,
             checkDisplay,
@@ -101,6 +103,35 @@ export default defineComponent<SearchFormProps>({
             resetFields,
             getSelectedAddressName: name => getSelectedAddressName(name, cityPicker.value),
         })
+
+        // 查询/重置按钮：inline 时作为 FormPage/Form 内的插槽跟随控件，否则作为兄弟节点放到表单下方。
+        const searchFormButtons = () =>
+            props.showButtons ? (
+                <div class="x-search-form-btns">
+                    {props.resetText && (
+                        <Button
+                            type="default"
+                            disabled={props.disabled || props.loading}
+                            loading={props.loading}
+                            onClick={handleReset}
+                            class="x-search-form-btn-reset"
+                        >
+                            {props.resetText}
+                        </Button>
+                    )}
+                    {props.searchText && (
+                        <Button
+                            type="primary"
+                            disabled={props.disabled || props.loading}
+                            loading={props.loading}
+                            onClick={handleSearch}
+                            class="x-search-form-btn-search"
+                        >
+                            {props.searchText}
+                        </Button>
+                    )}
+                </div>
+            ) : null
 
         // 展开收起
         const hasMore = ref(false)
@@ -211,7 +242,7 @@ export default defineComponent<SearchFormProps>({
                                                 }
                                             }}
                                             hide-required-mark={item.hideRequiredMark}
-                                            style={item.style || { 'min-width': '250px' }}
+                                            style={item.style}
                                             label={item.label}
                                             name={item.name}
                                             type={item.el || item.type}
@@ -247,34 +278,10 @@ export default defineComponent<SearchFormProps>({
                                     return null
                                 }
                             })}
+                            {isInline.value ? <Col class="x-search-form-inline-btns">{searchFormButtons()}</Col> : null}
                         </Row>
                     </Form>
-                    {props.showButtons && (
-                        <div class="x-search-form-btns">
-                            {props.resetText && (
-                                <Button
-                                    type="default"
-                                    disabled={props.disabled || props.loading}
-                                    loading={props.loading}
-                                    onClick={handleReset}
-                                    class="x-search-form-btn-reset"
-                                >
-                                    {props.resetText}
-                                </Button>
-                            )}
-                            {props.searchText && (
-                                <Button
-                                    type="primary"
-                                    disabled={props.disabled || props.loading}
-                                    loading={props.loading}
-                                    onClick={handleSearch}
-                                    class="x-search-form-btn-search"
-                                >
-                                    {props.searchText}
-                                </Button>
-                            )}
-                        </div>
-                    )}
+                    {isInline.value ? null : searchFormButtons()}
                     {slots?.default?.()}
                 </div>
             )

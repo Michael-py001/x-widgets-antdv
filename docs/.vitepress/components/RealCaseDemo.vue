@@ -210,7 +210,7 @@ const inlineDemoModel: FormBlock[] = [{ column: inlineWithUpload }]
         @search="applyQuery" @reset="resetQuery" />
       <div class="result-bar">
         <span>{{ filteredRows.length }} 条 · 第 {{ runCount }} 次查询</span>
-        <Tag text="schema 驱动" color="success" />
+        <Tag color="success">schema 驱动</Tag>
       </div>
       <div class="table-wrap">
         <table>
@@ -250,7 +250,7 @@ const inlineDemoModel: FormBlock[] = [{ column: inlineWithUpload }]
       <h4>③ 测算工作台 · 行内入参 <small>useGeneralCostEditForm</small></h4>
       <p class="case-hint">inline 布局下 colspan 不生效，因此 schema 不写 colspan；「本工程 Excel」用 formSlot 渲染函数做成点击上传框。</p>
       <FormPage :key="'inline'" :form-model="inlineDemoModel" :form-data="inlineForm"
-        layout="inline" label-width="92px" />
+        layout="inline" :gutter="[12, 12]" :vertical-gap="8" />
       <p class="x-note">当前入参：{{ JSON.stringify(inlineForm) }}</p>
     </section>
 
@@ -279,5 +279,16 @@ th { color: var(--vp-c-text-2); font-weight: 600; background: var(--vp-c-bg-soft
 .empty { text-align: center; color: var(--vp-c-text-3); }
 .saved { font-size: 12px; color: var(--vp-c-brand-1); margin: 8px 0 0; }
 .x-note { font-size: 12px; color: var(--vp-c-text-2); margin: 10px 0 0; }
+/* 详情/编辑弹窗跟随文档明暗模式，避免组件库默认白底刺眼。 */
+:deep(.ant-modal-content) { background: var(--vp-c-bg-soft); }
+:deep(.ant-modal-header) { background: var(--vp-c-bg-soft); border-bottom-color: var(--vp-c-divider); }
+:deep(.ant-modal-title), :deep(.ant-modal-close) { color: var(--vp-c-text-1); }
+:deep(.ant-modal-footer) { border-top-color: var(--vp-c-divider); }
+/* 弹窗被 Teleport 到 body，脱离了文档的 ConfigProvider，禁用态输入框需单独跟随暗色。 */
+:deep(.ant-input-disabled), :deep(.ant-input-number-disabled), :deep(.ant-select-disabled .ant-select-selector) { background: var(--vp-c-bg) !important; color: var(--vp-c-text-1) !important; border-color: var(--vp-c-divider) !important; }
+:deep(.ant-input-disabled), :deep(.ant-select-disabled .ant-select-selection-item) { opacity: 0.75; }
+:deep(.x-formpage-container-fixed-footer) { background: var(--vp-c-bg-soft); border-top: 1px solid var(--vp-c-divider); }
+/* inline 布局下字段之间保留间隙。 */
+:deep(.x-form-item) { padding-bottom: 8px; }
 :deep(.x-upload-pick) { display: inline-flex; align-items: center; min-height: 30px; padding: 4px 12px; border: 1px dashed var(--vp-c-brand-1); border-radius: 6px; color: var(--vp-c-brand-1); cursor: pointer; font-size: 13px; }
 </style>

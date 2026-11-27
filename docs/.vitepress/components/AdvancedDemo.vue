@@ -157,13 +157,13 @@ const formLayout = computed(() => layout.value === 'vertical' ? 'vertical' : 'ho
 
     <div class="slot-legend">
       <span>本页插槽：</span>
-      <Tag :text="'formSlot 渲染函数'" color="blue" />
-      <Tag :text="'formSlot 字符串名'" color="blue" />
-      <Tag :text="'beforeSlot / afterSlot'" color="cyan" />
-      <Tag :text="'block slot'" color="green" />
-      <Tag :text="'header / footer'" color="orange" />
-      <Tag :text="'modelTitle'" color="red" />
-      <Tag :text="'查询区 default'" color="cyan" />
+      <Tag color="blue">formSlot 渲染函数</Tag>
+      <Tag color="blue">formSlot 字符串名</Tag>
+      <Tag color="cyan">beforeSlot / afterSlot</Tag>
+      <Tag color="green">block slot</Tag>
+      <Tag color="orange">header / footer</Tag>
+      <Tag color="red">modelTitle</Tag>
+      <Tag color="cyan">查询区 default</Tag>
     </div>
 
     <CodeBlock :code="demoSource" />

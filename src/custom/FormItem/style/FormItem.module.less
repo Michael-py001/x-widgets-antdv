@@ -36,11 +36,17 @@
         }
         .ant-input-number,
         .ant-input-textarea,
-        .ant-calendar-picker {
+        .ant-calendar-picker,
+        .ant-slider {
             flex: 1;
         }
         .ant-input-number {
             width: 100%;
+        }
+        // Slider 是 flex 子项，不设宽度会收缩成只剩滑块圆点。
+        .ant-slider {
+            width: 100%;
+            min-width: 120px;
         }
         .autoLabelHeight {
             ::v-deep(.ant-form-item-label) > label {

@@ -4,6 +4,35 @@
   --vp-nav-logo-height: 30px;
 }
 
+/* 弹窗被 Teleport 到 body，脱离文档的 ConfigProvider。暗黑模式下让弹窗内的表单控件跟随站点主题。 */
+.dark .ant-modal-content {
+  background: var(--vp-c-bg-soft);
+}
+.dark .ant-modal-header,
+.dark .ant-modal-footer {
+  background: var(--vp-c-bg-soft);
+  border-color: var(--vp-c-divider);
+}
+.dark .ant-modal-title,
+.dark .ant-modal-close {
+  color: var(--vp-c-text-1);
+}
+.dark .ant-modal-content .ant-input,
+.dark .ant-modal-content textarea.ant-input,
+.dark .ant-modal-content .ant-input-number,
+.dark .ant-modal-content .ant-select-selector {
+  background-color: var(--vp-c-bg) !important;
+  color: var(--vp-c-text-1) !important;
+  border-color: var(--vp-c-divider) !important;
+}
+.dark .ant-modal-content .ant-form-item-label > label {
+  color: var(--vp-c-text-1);
+}
+.dark .x-formpage-container-fixed-footer {
+  background: var(--vp-c-bg-soft);
+  border-top-color: var(--vp-c-divider);
+}
+
 /* 语言下拉菜单必须能溢出导航栏：VitePress 的 .content 默认 overflow:auto 会把菜单裁掉。 */
 .VPNavBar .content {
   overflow: visible !important;
