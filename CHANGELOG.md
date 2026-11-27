@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+
+- Polished docs: select placeholders, full-width package tables, stripped and smaller highlighted code, default field spacing, a slot-rendering demo covering template/h()/TSX, split basic/advanced/slots pages with regrouped navigation, and refreshed screenshots.
+
 ## 0.1.2
 
 - Fixed documentation demo rendering: SearchForm two-column layout and inline buttons, Table and Tag display, Shiki code highlighting, dark-mode modal, inline field spacing, and full-width slider.
