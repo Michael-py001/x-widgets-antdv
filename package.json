@@ -1,6 +1,6 @@
 {
   "name": "x-widgets-antdv",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Vue 3 form component library built on Ant Design Vue 4 with typed schema-driven forms",
   "type": "module",
   "main": "./dist/index.cjs",
