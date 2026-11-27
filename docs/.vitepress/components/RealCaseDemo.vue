@@ -53,12 +53,12 @@ const stageColor = (stage: string) =>
   stage === 'feasibility' ? 'green' : stage === 'concept' ? 'blue' : 'default'
 
 const resultColumns: TableProps['columns'] = [
-  { title: '项目名称', dataIndex: 'projectName', key: 'projectName' },
-  { title: '业主单位', dataIndex: 'ownerUnit', key: 'ownerUnit' },
-  { title: '所在地', dataIndex: 'location', key: 'location' },
-  { title: '类型', dataIndex: 'projectType', key: 'projectType' },
-  { title: '阶段', dataIndex: 'designStage', key: 'stage' },
-  { title: '操作', key: 'ops' },
+  { title: '项目名称', dataIndex: 'projectName', key: 'projectName', width: 170 },
+  { title: '业主单位', dataIndex: 'ownerUnit', key: 'ownerUnit', width: 135 },
+  { title: '所在地', dataIndex: 'location', key: 'location', width: 75 },
+  { title: '类型', dataIndex: 'projectType', key: 'projectType', width: 75 },
+  { title: '阶段', dataIndex: 'designStage', key: 'stage', width: 75 },
+  { title: '操作', key: 'ops', width: 86 },
 ]
 
 /* ---------- ① 列表查询（来自 useBasicProjectSearchForm） ---------- */
@@ -225,7 +225,7 @@ const inlineDemoModel: FormBlock[] = [{ column: inlineWithUpload }]
         <span>{{ filteredRows.length }} 条 · 第 {{ runCount }} 次查询</span>
         <Tag color="success">schema 驱动</Tag>
       </div>
-      <Table :columns="resultColumns" :data-source="filteredRows" :pagination="false" :auto-srcoll-height="false" size="small" style="width:100%">
+      <Table :columns="resultColumns" :data-source="filteredRows" :pagination="false" :auto-srcoll-height="false" :scroll="{ x: '100%' }" size="small" style="width:100%">
         <template #projectType="{ text }">{{ labelOf(projectTypeOptions, text) }}</template>
         <template #stage="{ text }">
           <Tag :color="stageColor(text)">{{ labelOf(designStageOptions, text) }}</Tag>

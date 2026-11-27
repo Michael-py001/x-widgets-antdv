@@ -35,10 +35,10 @@ const records = [
 ]
 
 const resultColumns: TableProps['columns'] = [
-  { title: '项目名称', dataIndex: 'projectName', key: 'projectName' },
-  { title: '业主单位', dataIndex: 'ownerUnit', key: 'ownerUnit' },
-  { title: '类型', dataIndex: 'projectType', key: 'projectType' },
-  { title: '状态', dataIndex: 'stage', key: 'stage' },
+  { title: '项目名称', dataIndex: 'projectName', key: 'projectName', width: 210 },
+  { title: '业主单位', dataIndex: 'ownerUnit', key: 'ownerUnit', width: 185 },
+  { title: '类型', dataIndex: 'projectType', key: 'projectType', width: 125 },
+  { title: '状态', dataIndex: 'stage', key: 'stage', width: 100 },
 ]
 
 const applied = ref({ ...filters })
@@ -82,7 +82,7 @@ function stageColor(stage: string): string {
         <strong>查询结果</strong>
         <span>{{ result.length }} 条 · 第 {{ runs }} 次查询</span>
       </div>
-      <Table :columns="resultColumns" :data-source="result" :pagination="false" :auto-srcoll-height="false" size="small">
+      <Table :columns="resultColumns" :data-source="result" :pagination="false" :auto-srcoll-height="false" :scroll="{ x: '100%' }" size="small">
         <template #stage="{ text }">
           <Tag :color="stageColor(text)">{{ text }}</Tag>
         </template>

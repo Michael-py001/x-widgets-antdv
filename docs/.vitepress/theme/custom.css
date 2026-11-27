@@ -4,6 +4,50 @@
   --vp-nav-logo-height: 30px;
 }
 
+/* 表格撑满容器宽度：Ant Design Vue 表格默认按内容自适应，这里强制铺满。 */
+.ant-table table {
+  width: 100% !important;
+}
+
+/* 细圆角滚动条，跟随站点主题色；同时美化 Ant Design Vue 表格内部的纵向滚动条。 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--vp-c-brand-1) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--vp-c-brand-1);
+  border-radius: 8px;
+  opacity: 0.7;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-c-brand-2);
+}
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* 滑块使用主题蓝色，而不是 Ant Design Vue 默认的浅蓝。 */
+.ant-slider-track {
+  background: var(--vp-c-brand-1) !important;
+}
+.ant-slider-handle::after {
+  box-shadow: 0 0 0 2px var(--vp-c-brand-1) !important;
+}
+.ant-slider-handle:hover::after,
+.ant-slider-handle:active::after {
+  box-shadow: 0 0 0 4px var(--vp-c-brand-soft) !important;
+}
+.ant-slider-dot-active {
+  border-color: var(--vp-c-brand-1) !important;
+}
+
 /* 弹窗被 Teleport 到 body，脱离文档的 ConfigProvider。暗黑模式下让弹窗内的表单控件跟随站点主题。 */
 .dark .ant-modal-content {
   background: var(--vp-c-bg-soft);
