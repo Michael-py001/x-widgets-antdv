@@ -8,8 +8,8 @@
  * - useGeneralCostEditForm：inline 布局，colspan 不生效，操作按钮走 btnAfter 插槽。
  */
 import { computed, h, reactive, ref } from 'vue'
-import { SearchForm, FormModal, FormPage, Tag } from 'x-widgets-antdv'
-import type { ColumnForFormItemType, FormItemSlotRenderContext } from 'x-widgets-antdv'
+import { SearchForm, FormModal, FormPage, Table, Tag } from 'x-widgets-antdv'
+import type { ColumnForFormItemType, FormItemSlotRenderContext, TableProps } from 'x-widgets-antdv'
 import CodeBlock from './CodeBlock.vue'
 import demoSource from './RealCaseDemo.vue?raw'
 import 'ant-design-vue/dist/reset.css'
@@ -49,10 +49,22 @@ const yesNoOptions = [
 
 const labelOf = (options: Array<{ label: string; value: string }>, value: string) =>
   options.find((o) => o.value === value)?.label || '—'
+const stageColor = (stage: string) =>
+  stage === 'feasibility' ? 'green' : stage === 'concept' ? 'blue' : 'default'
+
+const resultColumns: TableProps['columns'] = [
+  { title: '项目名称', dataIndex: 'projectName', key: 'projectName' },
+  { title: '业主单位', dataIndex: 'ownerUnit', key: 'ownerUnit' },
+  { title: '所在地', dataIndex: 'location', key: 'location' },
+  { title: '类型', dataIndex: 'projectType', key: 'projectType' },
+  { title: '阶段', dataIndex: 'designStage', key: 'stage' },
+  { title: '操作', key: 'ops' },
+]
 
 /* ---------- ① 列表查询（来自 useBasicProjectSearchForm） ---------- */
 const query = reactive({
-  projectName: '', ownerUnit: '', location: '', projectType: '', designStage: '',
+  projectName: '', ownerUnit: '', location: '',
+  projectType: null as string | null, designStage: null as string | null,
 })
 
 const searchColumns: ColumnForFormItemType[] = [
@@ -63,11 +75,11 @@ const searchColumns: ColumnForFormItemType[] = [
   { el: 'input', label: '项目所在地', name: 'location', colspan: 12,
     props: { allowClear: true, placeholder: '请输入所在地' } },
   { el: 'select', label: '项目类型', name: 'projectType', colspan: 12,
-    options: [{ label: '全部', value: '' }, ...projectTypeOptions],
-    props: { allowClear: true, placeholder: '请选择项目类型' } },
+    options: projectTypeOptions,
+    props: { allowClear: true, placeholder: '全部类型' } },
   { el: 'select', label: '设计阶段', name: 'designStage', colspan: 12,
-    options: [{ label: '全部', value: '' }, ...designStageOptions],
-    props: { allowClear: true, placeholder: '请选择设计阶段' } },
+    options: designStageOptions,
+    props: { allowClear: true, placeholder: '全部阶段' } },
 ]
 
 const rows = ref<ProjectRow[]>([
@@ -84,7 +96,7 @@ function applyQuery() {
   runCount.value += 1
 }
 function resetQuery() {
-  Object.assign(applied, { projectName: '', ownerUnit: '', location: '', projectType: '', designStage: '' })
+  Object.assign(applied, { projectName: '', ownerUnit: '', location: '', projectType: null, designStage: null })
   runCount.value += 1
 }
 
@@ -109,7 +121,8 @@ const modalDisabled = computed(() => modalMode.value === 'detail')
 
 const emptyForm = () => ({
   projectName: '', ownerUnit: '', location: '', capacity: '',
-  projectType: '', designStage: '', isGeneralContract: '', remark: '',
+  projectType: null as string | null, designStage: null as string | null,
+  isGeneralContract: null as string | null, remark: '',
 })
 const formModel = reactive(emptyForm())
 
@@ -161,7 +174,7 @@ function onConfirm() {
 }
 
 /* ---------- ③ 行内筛选条（来自 useGeneralCostEditForm） ---------- */
-const inlineFilter = reactive({ systemFilter: '', matchStatusFilter: '', basisFilter: '' })
+const inlineFilter = reactive({ systemFilter: null as string | null, matchStatusFilter: null as string | null, basisFilter: '' })
 /** inline 布局下 colspan 不生效，所以这里不写 colspan——与原项目注释一致。 */
 const inlineColumns: ColumnForFormItemType[] = [
   { type: 'select', label: '系统', name: 'systemFilter',
@@ -206,31 +219,24 @@ const inlineDemoModel: FormBlock[] = [{ column: inlineWithUpload }]
       <h4>① 项目管理 · 列表查询 <small>useBasicProjectSearchForm</small></h4>
       <p class="case-hint">colspan=12 两列；填写后点「查询」，下方表格实时按同一份 formData 过滤。</p>
       <SearchForm :column="searchColumns" :form-data="query" layout="horizontal"
-        label-width="90px" :enabled-expand="false"
+        :label-col="{ style: { minWidth: '90px' } }" :enabled-expand="false"
         @search="applyQuery" @reset="resetQuery" />
       <div class="result-bar">
         <span>{{ filteredRows.length }} 条 · 第 {{ runCount }} 次查询</span>
         <Tag color="success">schema 驱动</Tag>
       </div>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>项目名称</th><th>业主单位</th><th>所在地</th><th>类型</th><th>阶段</th><th>操作</th></tr></thead>
-          <tbody>
-            <tr v-for="row in filteredRows" :key="row.id">
-              <td>{{ row.projectName }}</td>
-              <td>{{ row.ownerUnit }}</td>
-              <td>{{ row.location }}</td>
-              <td>{{ labelOf(projectTypeOptions, row.projectType) }}</td>
-              <td>{{ labelOf(designStageOptions, row.designStage) }}</td>
-              <td class="ops">
-                <button type="button" @click="openRow(row, 'detail')">详情</button>
-                <button type="button" @click="openRow(row, 'edit')">编辑</button>
-              </td>
-            </tr>
-            <tr v-if="!filteredRows.length"><td colspan="6" class="empty">无匹配数据</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <Table :columns="resultColumns" :data-source="filteredRows" :pagination="false" :auto-srcoll-height="false" size="small" style="width:100%">
+        <template #projectType="{ text }">{{ labelOf(projectTypeOptions, text) }}</template>
+        <template #stage="{ text }">
+          <Tag :color="stageColor(text)">{{ labelOf(designStageOptions, text) }}</Tag>
+        </template>
+        <template #ops="{ record }">
+          <div class="ops">
+            <button type="button" @click="openRow(record, 'detail')">详情</button>
+            <button type="button" @click="openRow(record, 'edit')">编辑</button>
+          </div>
+        </template>
+      </Table>
     </section>
 
     <!-- ② 弹窗表单 -->
@@ -241,7 +247,7 @@ const inlineDemoModel: FormBlock[] = [{ column: inlineWithUpload }]
       <p v-if="savedMessage" class="saved">{{ savedMessage }}</p>
       <FormModal v-model:show="modalVisible" :modal-title="modalTitle"
         :form-model="modalSchema" :form-data="formModel" :disabled="modalDisabled"
-        layout="horizontal" label-width="96px" modal-width="680px" :gutter="[24, 12]"
+        layout="horizontal" :label-col="{ style: { minWidth: '96px' } }" modal-width="680px"
         @confirm="onConfirm" />
     </section>
 
@@ -250,7 +256,7 @@ const inlineDemoModel: FormBlock[] = [{ column: inlineWithUpload }]
       <h4>③ 测算工作台 · 行内入参 <small>useGeneralCostEditForm</small></h4>
       <p class="case-hint">inline 布局下 colspan 不生效，因此 schema 不写 colspan；「本工程 Excel」用 formSlot 渲染函数做成点击上传框。</p>
       <FormPage :key="'inline'" :form-model="inlineDemoModel" :form-data="inlineForm"
-        layout="inline" :gutter="[12, 12]" :vertical-gap="8" />
+        layout="inline" />
       <p class="x-note">当前入参：{{ JSON.stringify(inlineForm) }}</p>
     </section>
 
@@ -269,14 +275,9 @@ const inlineDemoModel: FormBlock[] = [{ column: inlineWithUpload }]
 .case-block h4 small { font-weight: 400; font-size: 11px; color: var(--vp-c-text-3); margin-left: 6px; }
 .case-hint { margin: 0 0 10px; font-size: 12px; color: var(--vp-c-text-2); line-height: 1.5; }
 .result-bar { display: flex; align-items: center; justify-content: space-between; margin: 10px 0 8px; font-size: 12px; color: var(--vp-c-text-2); }
-.table-wrap { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--vp-c-divider); white-space: nowrap; }
-th { color: var(--vp-c-text-2); font-weight: 600; background: var(--vp-c-bg-soft); }
 .ops { display: flex; gap: 6px; }
 .ops button { font: inherit; font-size: 12px; padding: 4px 9px; border: 1px solid var(--vp-c-brand-1); border-radius: 5px; background: transparent; color: var(--vp-c-brand-1); cursor: pointer; }
 .ops button.primary { background: var(--vp-c-brand-1); color: #fff; }
-.empty { text-align: center; color: var(--vp-c-text-3); }
 .saved { font-size: 12px; color: var(--vp-c-brand-1); margin: 8px 0 0; }
 .x-note { font-size: 12px; color: var(--vp-c-text-2); margin: 10px 0 0; }
 /* 详情/编辑弹窗跟随文档明暗模式，避免组件库默认白底刺眼。 */
@@ -288,7 +289,5 @@ th { color: var(--vp-c-text-2); font-weight: 600; background: var(--vp-c-bg-soft
 :deep(.ant-input-disabled), :deep(.ant-input-number-disabled), :deep(.ant-select-disabled .ant-select-selector) { background: var(--vp-c-bg) !important; color: var(--vp-c-text-1) !important; border-color: var(--vp-c-divider) !important; }
 :deep(.ant-input-disabled), :deep(.ant-select-disabled .ant-select-selection-item) { opacity: 0.75; }
 :deep(.x-formpage-container-fixed-footer) { background: var(--vp-c-bg-soft); border-top: 1px solid var(--vp-c-divider); }
-/* inline 布局下字段之间保留间隙。 */
-:deep(.x-form-item) { padding-bottom: 8px; }
 :deep(.x-upload-pick) { display: inline-flex; align-items: center; min-height: 30px; padding: 4px 12px; border: 1px dashed var(--vp-c-brand-1); border-radius: 6px; color: var(--vp-c-brand-1); cursor: pointer; font-size: 13px; }
 </style>

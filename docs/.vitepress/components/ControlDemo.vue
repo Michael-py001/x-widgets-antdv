@@ -11,7 +11,7 @@ import 'ant-design-vue/dist/reset.css'
  * 字段不各自绑 v-model，而是把值写进同一个 formData。提交后驱动下方结果表。
  * 这是本包 Schema 桥接的核心：字段定义一次，查询与展示共用同一份契约。
  */
-const filters = reactive({ projectName: '', ownerUnit: '', projectType: '' })
+const filters = reactive({ projectName: '', ownerUnit: '', projectType: null as string | null })
 
 const columns: ColumnForFormItemType[] = [
   { name: 'projectName', label: '项目名称', el: 'input', colspan: 12,
@@ -20,12 +20,11 @@ const columns: ColumnForFormItemType[] = [
     props: { allowClear: true, placeholder: '输入业主单位' } },
   { name: 'projectType', label: '项目类型', el: 'select', colspan: 12,
     options: [
-      { label: '全部', value: '' },
       { label: '燃机', value: 'gas' },
       { label: '输电', value: 'grid' },
       { label: '海风', value: 'offshore' },
     ],
-    props: { allowClear: true } },
+    props: { allowClear: true, placeholder: '全部类型' } },
 ]
 
 const records = [

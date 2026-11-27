@@ -284,7 +284,7 @@ const props = defineProps({
     // 字段垂直间隔
     verticalGap: {
         type: [String, Number],
-        default: '8',
+        default: '0',
     },
     // 表单容器多余高度
     extraHeight: {

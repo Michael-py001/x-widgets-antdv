@@ -14,7 +14,7 @@ import demoSource from './ControlGallery.vue?raw'
 import 'ant-design-vue/dist/reset.css'
 
 const formData = reactive<Record<string, any>>({
-  text: '', textarea: '', number: 1, select: '', radio: 'gas', checkbox: true,
+  text: '', textarea: '', number: 1, select: null, radio: 'gas', checkbox: true,
   checkboxGroup: ['estimate'], switchOn: true, date: '', range: [],
   rate: 3, slider: 40, segmented: 'month', textReadonly: '由 textValue 展示，不写回模型',
 })
@@ -73,7 +73,7 @@ const entries = computed(() => Object.entries(formData).map(([key, value]) => ({
       <p>一份 <code>column</code> schema 渲染 <b>14 种控件</b>，全部由 <code>FormPage</code> 桥接到同一个 <code>formData</code>。试着修改任意字段，下方模型实时同步。</p>
     </div>
 
-    <FormPage :form-model="model" :form-data="formData" layout="horizontal" label-width="92px" />
+    <FormPage :form-model="model" :form-data="formData" layout="horizontal" />
 
     <div class="model-view">
       <div class="model-view__title">formData（实时）</div>

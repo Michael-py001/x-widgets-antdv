@@ -70,12 +70,21 @@ export default defineConfig({
             { text: '从这里开始', items: [{ text: '安装与配置', link: '/guide' }] },
           ],
           '/components': [
-            { text: '参考', items: [
+            { text: '基础', items: [
               { text: '导出的组件', link: '/components/' },
               { text: '基础控件', link: '/components/controls' },
+              { text: '基础案例', link: '/components/cases-basic' },
+            ] },
+            { text: '进阶', items: [
               { text: '表单 Schema', link: '/components/forms' },
               { text: '表格', link: '/components/table' },
+              { text: '进阶案例', link: '/components/cases-advanced' },
+              { text: '插槽', link: '/components/slots' },
+            ] },
+            { text: '扩展', items: [
               { text: '扩展组件', link: '/components/extended-widgets' },
+            ] },
+            { text: '兼容性', items: [
               { text: '跨库兼容性', link: '/components/compatibility' },
             ] },
           ],
@@ -117,12 +126,21 @@ export default defineConfig({
             { text: 'Start here', items: [{ text: 'Installation & setup', link: '/en/guide' }] },
           ],
           '/en/components': [
-            { text: 'Reference', items: [
+            { text: 'Basics', items: [
               { text: 'Exported components', link: '/en/components/' },
               { text: 'Controls', link: '/en/components/controls' },
+              { text: 'Basic examples', link: '/en/components/cases-basic' },
+            ] },
+            { text: 'Advanced', items: [
               { text: 'Schema forms', link: '/en/components/forms' },
               { text: 'Table', link: '/en/components/table' },
+              { text: 'Advanced examples', link: '/en/components/cases-advanced' },
+              { text: 'Slots', link: '/en/components/slots' },
+            ] },
+            { text: 'Extensions', items: [
               { text: 'Extended widgets', link: '/en/components/extended-widgets' },
+            ] },
+            { text: 'Compatibility', items: [
               { text: 'Cross-library compatibility', link: '/en/components/compatibility' },
             ] },
           ],

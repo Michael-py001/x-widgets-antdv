@@ -6,23 +6,32 @@ import { useData, withBase } from 'vitepress'
 const { lang } = useData()
 const isZh = computed(() => lang.value.toLowerCase().startsWith('zh'))
 // 英文站点位于 /en/ 下；GitHub Pages 部署在子路径，链接与图片都要带 base 前缀。
-const linkBase = computed(() => withBase((isZh.value ? '' : '/en') + '/components/controls'))
+const link = (path: string) => withBase((isZh.value ? '' : '/en') + path)
 
 const items = computed(() => [
   {
     img: withBase('/screenshots/real-case.webp'),
+    href: link('/components/cases-advanced'),
     zh: { tag: '真实案例', title: '查询 → 表格 → 弹窗复用同一份 Schema', desc: '项目管理双列查询、新增/编辑弹窗、测算行内入参，字段只声明一次。' },
     en: { tag: 'Real cases', title: 'One schema across search, table, and modal', desc: 'Two-column project query, create/edit modal, and inline cost inputs — fields declared once.' },
   },
   {
     img: withBase('/screenshots/advanced.webp'),
+    href: link('/components/cases-advanced'),
     zh: { tag: '进阶用法', title: '一份字段契约，四种布局', desc: '多列 / 左右 / 行内 / 垂直布局复用同一 schema，覆盖 formSlot、前后缀与容器插槽。' },
     en: { tag: 'Advanced', title: 'One field contract, four layouts', desc: 'Multi-column, split, inline, and vertical layouts from one schema, with formSlot and affix slots.' },
   },
   {
     img: withBase('/screenshots/gallery.webp'),
+    href: link('/components/cases-basic'),
     zh: { tag: '控件画廊', title: '一份 column 渲染全部控件', desc: '由 FormPage 桥接到同一个 formData，修改字段即可实时看到模型同步。' },
     en: { tag: 'Control gallery', title: 'One column renders every control', desc: 'FormPage bridges them to a single formData; edit a field and watch the model update live.' },
+  },
+  {
+    img: withBase('/screenshots/slots.webp'),
+    href: link('/components/slots'),
+    zh: { tag: '插槽演示', title: '三种 formSlot 写法对照', desc: '字符串插槽名、h() 渲染函数与 TSX 渲染函数同屏展示，并演示区块与容器插槽。' },
+    en: { tag: 'Slots', title: 'Three formSlot styles side by side', desc: 'String slot name, h() render function, and TSX render function at once, plus block and container slots.' },
   },
 ])
 
@@ -70,7 +79,7 @@ onBeforeUnmount(() => {
             </svg>
           </span>
         </button>
-        <a class="showcase-card__body" :href="linkBase">
+        <a class="showcase-card__body" :href="item.href">
           <span class="showcase-card__tag">{{ isZh ? item.zh.tag : item.en.tag }}</span>
           <h3>{{ isZh ? item.zh.title : item.en.title }}</h3>
           <p>{{ isZh ? item.zh.desc : item.en.desc }}</p>
@@ -109,7 +118,7 @@ onBeforeUnmount(() => {
 }
 .showcase-gallery__grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
 }
 .showcase-card {

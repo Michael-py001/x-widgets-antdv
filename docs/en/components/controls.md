@@ -57,37 +57,7 @@ const statusOptions = [
 
 The package does not fetch options or own request state. Keep options, loading state, permissions, and side effects in the host application.
 
-## Interactive example
-
-### Basic usage
-
-One `column` schema is rendered by `SearchForm` into a query form; all field values write into a single `formData` object, then filter the results below. Try a project name, owner, or type, then click "Search".
-
-<ClientOnly><AntdvControlDemo /></ClientOnly>
-
-### Advanced usage
-
-Switch between "multi-column / split / inline": the same field contract renders three ways — `colspan` grid, `fieldsetStyle` split columns, and an inline `SearchForm`. Slots cover `formSlot` render functions, `beforeSlot`/`afterSlot` affixes, and a named string `slot`. Click "Attachment" to try the slot.
-
-<ClientOnly><AntdvAdvancedDemo /></ClientOnly>
-
-### Real-page case
-
-Three composables from real pages, reduced to one interactive demo that shows schema bridging in production scenarios:
-
-1. **Project management · list query** (`useBasicProjectSearchForm`): a two-column (`colspan=12`) query form; submitting filters the table from the same `formData`.
-2. **Create / edit modal** (`useBasicProjectFormModal`): detail, edit and create share one `formModel`; detail mode only flips `disabled`.
-3. **Cost workbench · inline inputs** (`useGeneralCostEditForm`): `colspan` has no effect in an `inline` layout; a `formSlot` render function turns a field into a click-to-upload box.
-
-Try searching, creating a project, then editing or viewing its details to see one field contract reused across all three scenarios.
-
-<ClientOnly><AntdvRealCaseDemo /></ClientOnly>
-
-### Control gallery
-
-The scenarios above mostly use text and select fields. Here 14 form controls are written into **one `column` schema** and rendered by `FormPage` into a single `formData`; editing any control updates the model below live. This is schema bridging, not importing each component and binding its own `v-model`.
-
-<ClientOnly><AntdvControlGallery /></ClientOnly>
+Interactive examples have moved to dedicated pages: [basic examples](/en/components/cases-basic), [advanced examples](/en/components/cases-advanced), and [slots](/en/components/slots).
 
 ## Form-aware controls
 

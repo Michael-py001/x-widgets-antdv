@@ -3,6 +3,7 @@ import ControlDemo from '../components/ControlDemo.vue'
 import AdvancedDemo from '../components/AdvancedDemo.vue'
 import RealCaseDemo from '../components/RealCaseDemo.vue'
 import ControlGallery from '../components/ControlGallery.vue'
+import SlotDemo from '../components/SlotDemo.vue'
 import ShowcaseGallery from '../components/ShowcaseGallery.vue'
 import DocsConfig from '../components/DocsConfig.vue'
 import './custom.css'
@@ -17,6 +18,7 @@ export default {
     app.component('AntdvAdvancedDemo', AdvancedDemo)
     app.component('AntdvRealCaseDemo', RealCaseDemo)
     app.component('AntdvControlGallery', ControlGallery)
+    app.component('AntdvSlotDemo', SlotDemo)
     app.component('ShowcaseGallery', ShowcaseGallery)
   },
 }
