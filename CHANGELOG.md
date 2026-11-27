@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.4
+
+- Made demo tables fill their container, themed scrollbars with the site brand color, and changed the slider to use the theme blue.
+
 ## 0.1.3
 
 - Polished docs: select placeholders, full-width package tables, stripped and smaller highlighted code, default field spacing, a slot-rendering demo covering template/h()/TSX, split basic/advanced/slots pages with regrouped navigation, and refreshed screenshots.
