@@ -1,11 +1,11 @@
 <script setup lang="ts">
 /**
- * 真实案例简化：项目管理页（列表查询 + FormModal 录入 + 行内筛选）。
+ * 真实案例简化：示例管理页（列表查询 + FormModal 录入 + 行内筛选）。
  *
- * 三段 schema 全部来自原项目 composable 的简化：
- * - useBasicProjectSearchForm：colspan 两列查询表单；
- * - useBasicProjectFormModal：详情/编辑共用一套 formModel，用 disabled 切换只读；
- * - useGeneralCostEditForm：inline 布局，colspan 不生效，操作按钮走 btnAfter 插槽。
+ * 三段 schema 全部简化自通用 composable 的写法：
+ * - useGenericSearchForm：colspan 两列查询表单；
+ * - useGenericFormModal：详情/编辑共用一套 formModel，用 disabled 切换只读；
+ * - useGenericInlineEdit：inline 布局，colspan 不生效，操作按钮走 btnAfter 插槽。
  */
 import { computed, h, reactive, ref } from 'vue'
 import { SearchForm, FormModal, FormPage, Table, Tag } from 'x-widgets-antdv'
@@ -23,24 +23,24 @@ interface FormBlock {
 interface ProjectRow {
   id: number
   projectName: string
-  ownerUnit: string
+  department: string
   location: string
-  projectType: string
-  designStage: string
-  capacity: string
-  isGeneralContract: string
+  category: string
+  status: string
+  spec: string
+  enabled: string
   remark: string
 }
 
-const projectTypeOptions = [
-  { label: '燃机', value: 'gas' },
-  { label: '输电', value: 'grid' },
-  { label: '海风', value: 'offshore' },
+const categoryOptions = [
+  { label: '类型A', value: 'typeA' },
+  { label: '类型B', value: 'typeB' },
+  { label: '类型C', value: 'typeC' },
 ]
-const designStageOptions = [
-  { label: '可研', value: 'feasibility' },
-  { label: '初设', value: 'concept' },
-  { label: '施工图', value: 'detail' },
+const statusOptions = [
+  { label: '草稿', value: 'draft' },
+  { label: '审核中', value: 'review' },
+  { label: '已完成', value: 'done' },
 ]
 const yesNoOptions = [
   { label: '是', value: 'yes' },
@@ -49,43 +49,43 @@ const yesNoOptions = [
 
 const labelOf = (options: Array<{ label: string; value: string }>, value: string) =>
   options.find((o) => o.value === value)?.label || '—'
-const stageColor = (stage: string) =>
-  stage === 'feasibility' ? 'green' : stage === 'concept' ? 'blue' : 'default'
+const statusColor = (status: string) =>
+  status === 'draft' ? 'green' : status === 'review' ? 'blue' : 'default'
 
 const resultColumns: TableProps['columns'] = [
   { title: '项目名称', dataIndex: 'projectName', key: 'projectName', width: 170 },
-  { title: '业主单位', dataIndex: 'ownerUnit', key: 'ownerUnit', width: 135 },
+  { title: '所属单位', dataIndex: 'department', key: 'department', width: 135 },
   { title: '所在地', dataIndex: 'location', key: 'location', width: 75 },
-  { title: '类型', dataIndex: 'projectType', key: 'projectType', width: 75 },
-  { title: '阶段', dataIndex: 'designStage', key: 'stage', width: 75 },
+  { title: '类型', dataIndex: 'category', key: 'category', width: 75 },
+  { title: '状态', dataIndex: 'status', key: 'status', width: 75 },
   { title: '操作', key: 'ops', width: 86 },
 ]
 
-/* ---------- ① 列表查询（来自 useBasicProjectSearchForm） ---------- */
+/* ---------- ① 列表查询（来自 useGenericSearchForm） ---------- */
 const query = reactive({
-  projectName: '', ownerUnit: '', location: '',
-  projectType: null as string | null, designStage: null as string | null,
+  projectName: '', department: '', location: '',
+  category: null as string | null, status: null as string | null,
 })
 
 const searchColumns: ColumnForFormItemType[] = [
   { el: 'input', label: '项目名称', name: 'projectName', colspan: 12,
     props: { allowClear: true, placeholder: '请输入项目名称' } },
-  { el: 'input', label: '业主单位', name: 'ownerUnit', colspan: 12,
-    props: { allowClear: true, placeholder: '请输入业主单位' } },
+  { el: 'input', label: '所属单位', name: 'department', colspan: 12,
+    props: { allowClear: true, placeholder: '请输入所属单位' } },
   { el: 'input', label: '项目所在地', name: 'location', colspan: 12,
     props: { allowClear: true, placeholder: '请输入所在地' } },
-  { el: 'select', label: '项目类型', name: 'projectType', colspan: 12,
-    options: projectTypeOptions,
+  { el: 'select', label: '项目类型', name: 'category', colspan: 12,
+    options: categoryOptions,
     props: { allowClear: true, placeholder: '全部类型' } },
-  { el: 'select', label: '设计阶段', name: 'designStage', colspan: 12,
-    options: designStageOptions,
-    props: { allowClear: true, placeholder: '全部阶段' } },
+  { el: 'select', label: '项目状态', name: 'status', colspan: 12,
+    options: statusOptions,
+    props: { allowClear: true, placeholder: '全部状态' } },
 ]
 
 const rows = ref<ProjectRow[]>([
-  { id: 1, projectName: '燃机造价分析', ownerUnit: '华东院', location: '江苏', projectType: 'gas', designStage: 'feasibility', capacity: '2×500MW', isGeneralContract: 'yes', remark: '' },
-  { id: 2, projectName: '特高压线路评估', ownerUnit: '国网设计院', location: '湖北', projectType: 'grid', designStage: 'concept', capacity: '—', isGeneralContract: 'no', remark: '' },
-  { id: 3, projectName: '近海风电场测算', ownerUnit: '中广核', location: '广东', projectType: 'offshore', designStage: 'detail', capacity: '300MW', isGeneralContract: 'yes', remark: '' },
+  { id: 1, projectName: '示例项目一', department: '示例单位甲', location: '示例地区一', category: 'typeA', status: 'draft', spec: '示例规格A', enabled: 'yes', remark: '' },
+  { id: 2, projectName: '示例项目二', department: '示例单位乙', location: '示例地区二', category: 'typeB', status: 'review', spec: '—', enabled: 'no', remark: '' },
+  { id: 3, projectName: '示例项目三', department: '示例单位丙', location: '示例地区三', category: 'typeC', status: 'done', spec: '示例规格B', enabled: 'yes', remark: '' },
 ])
 
 const applied = reactive({ ...query })
@@ -96,19 +96,19 @@ function applyQuery() {
   runCount.value += 1
 }
 function resetQuery() {
-  Object.assign(applied, { projectName: '', ownerUnit: '', location: '', projectType: null, designStage: null })
+  Object.assign(applied, { projectName: '', department: '', location: '', category: null, status: null })
   runCount.value += 1
 }
 
 const filteredRows = computed(() => rows.value.filter((row) => (
   (!applied.projectName || row.projectName.includes(applied.projectName)) &&
-  (!applied.ownerUnit || row.ownerUnit.includes(applied.ownerUnit)) &&
+  (!applied.department || row.department.includes(applied.department)) &&
   (!applied.location || row.location.includes(applied.location)) &&
-  (!applied.projectType || row.projectType === applied.projectType) &&
-  (!applied.designStage || row.designStage === applied.designStage)
+  (!applied.category || row.category === applied.category) &&
+  (!applied.status || row.status === applied.status)
 )))
 
-/* ---------- ② 新增 / 编辑弹窗（来自 useBasicProjectFormModal） ---------- */
+/* ---------- ② 新增 / 编辑弹窗（来自 useGenericFormModal） ---------- */
 type ModalMode = 'create' | 'edit' | 'detail'
 const modalVisible = ref(false)
 const modalMode = ref<ModalMode>('detail')
@@ -120,9 +120,9 @@ const modalTitle = computed(() => (
 const modalDisabled = computed(() => modalMode.value === 'detail')
 
 const emptyForm = () => ({
-  projectName: '', ownerUnit: '', location: '', capacity: '',
-  projectType: null as string | null, designStage: null as string | null,
-  isGeneralContract: null as string | null, remark: '',
+  projectName: '', department: '', location: '', spec: '',
+  category: null as string | null, status: null as string | null,
+  enabled: null as string | null, remark: '',
 })
 const formModel = reactive(emptyForm())
 
@@ -130,18 +130,18 @@ const modalSchema: FormBlock[] = [
   { title: '基本信息', column: [
     { label: '项目名称', type: 'input', name: 'projectName', required: true, colspan: 12,
       props: { placeholder: '请输入项目名称', allowClear: true } },
-    { label: '业主单位', type: 'input', name: 'ownerUnit', required: true, colspan: 12,
-      props: { placeholder: '请输入业主单位', allowClear: true } },
+    { label: '所属单位', type: 'input', name: 'department', required: true, colspan: 12,
+      props: { placeholder: '请输入所属单位', allowClear: true } },
     { label: '项目所在地', type: 'input', name: 'location', required: true, colspan: 12,
       props: { placeholder: '请输入项目所在地', allowClear: true } },
-    { label: '装机容量', type: 'input', name: 'capacity', required: true, colspan: 12,
-      props: { placeholder: '示例：2×500MW', allowClear: true } },
-    { label: '项目类型', type: 'select', name: 'projectType', required: true, colspan: 12,
-      options: projectTypeOptions, props: { allowClear: true, placeholder: '请选择项目类型' } },
-    { label: '设计阶段', type: 'select', name: 'designStage', required: true, colspan: 12,
-      options: designStageOptions, props: { allowClear: true, placeholder: '请选择设计阶段' } },
-    { label: '是否总包', type: 'select', name: 'isGeneralContract', required: true, colspan: 12,
-      options: yesNoOptions, props: { allowClear: true, placeholder: '请选择是否总包' } },
+    { label: '规格参数', type: 'input', name: 'spec', required: true, colspan: 12,
+      props: { placeholder: '示例：示例规格A', allowClear: true } },
+    { label: '项目类型', type: 'select', name: 'category', required: true, colspan: 12,
+      options: categoryOptions, props: { allowClear: true, placeholder: '请选择项目类型' } },
+    { label: '项目状态', type: 'select', name: 'status', required: true, colspan: 12,
+      options: statusOptions, props: { allowClear: true, placeholder: '请选择项目状态' } },
+    { label: '是否启用', type: 'select', name: 'enabled', required: true, colspan: 12,
+      options: yesNoOptions, props: { allowClear: true, placeholder: '请选择是否启用' } },
     { label: '备注', type: 'textarea', name: 'remark', colspan: 24,
       props: { placeholder: '可选填写补充说明', rows: 3 } },
   ] },
@@ -155,9 +155,9 @@ function openCreate() {
 function openRow(row: ProjectRow, mode: ModalMode) {
   modalMode.value = mode
   Object.assign(formModel, {
-    projectName: row.projectName, ownerUnit: row.ownerUnit, location: row.location,
-    capacity: row.capacity, projectType: row.projectType, designStage: row.designStage,
-    isGeneralContract: row.isGeneralContract, remark: row.remark,
+    projectName: row.projectName, department: row.department, location: row.location,
+    spec: row.spec, category: row.category, status: row.status,
+    enabled: row.enabled, remark: row.remark,
   })
   modalVisible.value = true
 }
@@ -173,33 +173,33 @@ function onConfirm() {
   savedMessage.value = `${modalTitle.value}已提交：${payload.projectName}`
 }
 
-/* ---------- ③ 行内筛选条（来自 useGeneralCostEditForm） ---------- */
+/* ---------- ③ 行内筛选条（来自 useGenericInlineEdit） ---------- */
 const inlineFilter = reactive({ systemFilter: null as string | null, matchStatusFilter: null as string | null, basisFilter: '' })
-/** inline 布局下 colspan 不生效，所以这里不写 colspan——与原项目注释一致。 */
+/** inline 布局下 colspan 不生效，所以这里不写 colspan——与原页面注释一致。 */
 const inlineColumns: ColumnForFormItemType[] = [
-  { type: 'select', label: '系统', name: 'systemFilter',
+  { type: 'select', label: '分类', name: 'systemFilter',
     options: [
-      { label: '锅炉', value: 'boiler' }, { label: '汽机', value: 'turbine' }, { label: '电气', value: 'electric' },
+      { label: '类别一', value: 'categoryA' }, { label: '类别二', value: 'categoryB' }, { label: '类别三', value: 'categoryC' },
     ],
-    props: { allowClear: true, placeholder: '请选择系统' } },
+    props: { allowClear: true, placeholder: '请选择分类' } },
   { type: 'select', label: '匹配状态', name: 'matchStatusFilter',
     options: [
       { label: '已匹配', value: 'done' }, { label: '待核对', value: 'check' },
     ],
     props: { allowClear: true, placeholder: '请选择匹配状态' } },
   { type: 'input', label: '项目依据', name: 'basisFilter',
-    props: { allowClear: true, placeholder: '请输入编制依据关键字' } },
+    props: { allowClear: true, placeholder: '请输入关键字' } },
 ]
 /** 替代原页面的上传触发器：formSlot 渲染函数拿到 formData/label 上下文。 */
 function uploadSlot({ formData: model, label }: FormItemSlotRenderContext) {
   return h('div', {
     class: 'x-upload-pick', tabindex: '0',
-    onClick: () => { model.uploadedFileName = '本工程清单.xlsx' },
+    onClick: () => { model.uploadedFileName = '示例清单.xlsx' },
   }, model.uploadedFileName || `点击选择${label}（formSlot 渲染函数）`)
 }
 const inlineWithUpload: ColumnForFormItemType[] = [
   ...inlineColumns,
-  { label: '本工程 Excel', name: 'uploadedFileName', formSlot: uploadSlot },
+  { label: '示例附件', name: 'uploadedFileName', formSlot: uploadSlot },
 ]
 const inlineForm = reactive({ uploadedFileName: '', ...inlineFilter })
 
@@ -211,12 +211,12 @@ const inlineDemoModel: FormBlock[] = [{ column: inlineWithUpload }]
   <div class="real-case" data-ui>
     <div class="real-case__head">
       <span class="tag">真实案例简化</span>
-      <p>下面三段交互分别简化自原项目三个页面的真实 composable；<b>字段只写一次 schema</b>，由 <code>SearchForm</code> / <code>FormPage</code> / <code>FormModal</code> 桥接渲染。</p>
+      <p>下面三段交互分别简化自通用页面的 composable 写法；<b>字段只写一次 schema</b>，由 <code>SearchForm</code> / <code>FormPage</code> / <code>FormModal</code> 桥接渲染。</p>
     </div>
 
     <!-- ① 列表查询 -->
     <section class="case-block">
-      <h4>① 项目管理 · 列表查询 <small>useBasicProjectSearchForm</small></h4>
+      <h4>① 示例管理 · 列表查询 <small>useGenericSearchForm</small></h4>
       <p class="case-hint">colspan=12 两列；填写后点「查询」，下方表格实时按同一份 formData 过滤。</p>
       <SearchForm :column="searchColumns" :form-data="query" layout="horizontal"
         :label-col="{ style: { minWidth: '90px' } }" :enabled-expand="false"
@@ -226,9 +226,9 @@ const inlineDemoModel: FormBlock[] = [{ column: inlineWithUpload }]
         <Tag color="success">schema 驱动</Tag>
       </div>
       <Table :columns="resultColumns" :data-source="filteredRows" :pagination="false" :auto-srcoll-height="false" :scroll="{ x: '100%' }" size="small" style="width:100%">
-        <template #projectType="{ text }">{{ labelOf(projectTypeOptions, text) }}</template>
-        <template #stage="{ text }">
-          <Tag :color="stageColor(text)">{{ labelOf(designStageOptions, text) }}</Tag>
+        <template #category="{ text }">{{ labelOf(categoryOptions, text) }}</template>
+        <template #status="{ text }">
+          <Tag :color="statusColor(text)">{{ labelOf(statusOptions, text) }}</Tag>
         </template>
         <template #ops="{ record }">
           <div class="ops">
@@ -241,7 +241,7 @@ const inlineDemoModel: FormBlock[] = [{ column: inlineWithUpload }]
 
     <!-- ② 弹窗表单 -->
     <section class="case-block">
-      <h4>② 新增 / 编辑弹窗 <small>useBasicProjectFormModal</small></h4>
+      <h4>② 新增 / 编辑弹窗 <small>useGenericFormModal</small></h4>
       <p class="case-hint">详情、编辑、新增共用同一套 formModel；detail 模式只切换 disabled，不另写只读组件。</p>
       <div class="ops"><button type="button" class="primary" @click="openCreate">+ 新增项目</button></div>
       <p v-if="savedMessage" class="saved">{{ savedMessage }}</p>
@@ -253,8 +253,8 @@ const inlineDemoModel: FormBlock[] = [{ column: inlineWithUpload }]
 
     <!-- ③ 行内筛选条 -->
     <section class="case-block">
-      <h4>③ 测算工作台 · 行内入参 <small>useGeneralCostEditForm</small></h4>
-      <p class="case-hint">inline 布局下 colspan 不生效，因此 schema 不写 colspan；「本工程 Excel」用 formSlot 渲染函数做成点击上传框。</p>
+      <h4>③ 工作台 · 行内入参 <small>useGenericInlineEdit</small></h4>
+      <p class="case-hint">inline 布局下 colspan 不生效，因此 schema 不写 colspan；「示例附件」用 formSlot 渲染函数做成点击上传框。</p>
       <FormPage :key="'inline'" :form-model="inlineDemoModel" :form-data="inlineForm"
         layout="inline" />
       <p class="x-note">当前入参：{{ JSON.stringify(inlineForm) }}</p>

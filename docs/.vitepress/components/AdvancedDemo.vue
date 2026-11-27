@@ -18,8 +18,8 @@ import 'ant-design-vue/dist/reset.css'
  * 查询区用 default 插槽追加操作按钮。
  */
 const formData = reactive({
-  projectName: '', ownerUnit: '', projectType: null as string | null, designStage: null as string | null,
-  remark: '', attachment: '', contact: '', investment: '',
+  projectName: '', department: '', category: null as string | null, status: null as string | null,
+  remark: '', attachment: '', contact: '', budget: '',
 })
 
 type Layout = 'multi' | 'split' | 'inline' | 'vertical'
@@ -32,7 +32,7 @@ const layoutLabels: Record<Layout, string> = {
 function attachmentSlot({ formData: model, label }: FormItemSlotRenderContext) {
   return h('div', {
     class: 'x-pick', tabindex: '0',
-    onClick: () => { model.attachment = '立项批复.pdf' },
+    onClick: () => { model.attachment = '示例附件.pdf' },
   }, model.attachment || `点击选择${label}`)
 }
 // 2) 前置插槽：beforeSlot 渲染函数（展示在字段名左侧，不与 label 重复）
@@ -47,26 +47,26 @@ function blockSlot({ item }: FormBlockSlotRenderContext) {
 const baseFields: ColumnForFormItemType[] = [
   { label: '项目名称', name: 'projectName', type: 'input', required: true, colspan: 12,
     props: { placeholder: '请输入项目名称', allowClear: true } },
-  { label: '业主单位', name: 'ownerUnit', type: 'input', colspan: 12,
-    props: { placeholder: '请输入业主单位' } },
-  { label: '静态投资', name: 'investment', type: 'input-number', colspan: 24,
+  { label: '所属单位', name: 'department', type: 'input', colspan: 12,
+    props: { placeholder: '请输入所属单位' } },
+  { label: '预算金额', name: 'budget', type: 'input-number', colspan: 24,
     beforeSlot: beforeUnit, afterSlot: afterUnit,
-    props: { placeholder: '请输入静态投资', style: { width: '220px' } } },
+    props: { placeholder: '请输入预算金额', style: { width: '220px' } } },
   { label: '联系人', name: 'contact', colspan: 12, formSlot: 'contactSlot' },
-  { label: '项目类型', name: 'projectType', type: 'select', colspan: 12,
+  { label: '项目类型', name: 'category', type: 'select', colspan: 12,
     options: [
-      { label: '燃机', value: 'gas' }, { label: '输电', value: 'grid' }, { label: '海风', value: 'offshore' },
+      { label: '类型A', value: 'typeA' }, { label: '类型B', value: 'typeB' }, { label: '类型C', value: 'typeC' },
     ] },
-  { label: '设计阶段', name: 'designStage', type: 'select', colspan: 12,
+  { label: '项目状态', name: 'status', type: 'select', colspan: 12,
     options: [
-      { label: '可研', value: 'feasibility' }, { label: '初设', value: 'concept' }, { label: '施工图', value: 'detail' },
+      { label: '草稿', value: 'draft' }, { label: '审核中', value: 'review' }, { label: '已完成', value: 'done' },
     ] },
 ]
 
 const multiModel: FormModelBlock[] = [
   { title: '项目信息 · 两列', column: baseFields },
   { title: '附件与说明', column: [
-    { label: '工程附件', name: 'attachment', colspan: 24, formSlot: attachmentSlot },
+    { label: '示例附件', name: 'attachment', colspan: 24, formSlot: attachmentSlot },
     { slot: blockSlot },
     { label: '备注', name: 'remark', type: 'textarea', colspan: 24, props: { rows: 2 } },
   ] },
@@ -77,7 +77,7 @@ const splitModel: FormModelBlock[] = [
     title: '基本信息',
     column: [
       { label: '项目名称', name: 'projectName', type: 'input', colspan: 24, props: { placeholder: '请输入' } },
-      { label: '业主单位', name: 'ownerUnit', type: 'input', colspan: 24, props: { placeholder: '请输入' } },
+      { label: '所属单位', name: 'department', type: 'input', colspan: 24, props: { placeholder: '请输入' } },
       { label: '联系人', name: 'contact', colspan: 24, formSlot: 'contactSlot' },
     ],
   },
@@ -90,12 +90,12 @@ const splitModel: FormModelBlock[] = [
 
 const inlineColumns: ColumnForFormItemType[] = [
   { name: 'projectName', label: '项目名称', el: 'input', props: { placeholder: '项目名称', allowClear: true } },
-  { name: 'ownerUnit', label: '业主', el: 'input', props: { placeholder: '业主', allowClear: true } },
-  { name: 'projectType', label: '类型', el: 'select', options: [
-    { label: '燃机', value: 'gas' }, { label: '海风', value: 'offshore' },
+  { name: 'department', label: '所属单位', el: 'input', props: { placeholder: '所属单位', allowClear: true } },
+  { name: 'category', label: '类型', el: 'select', options: [
+    { label: '类型A', value: 'typeA' }, { label: '类型C', value: 'typeC' },
   ], props: { placeholder: '全部类型' } },
 ]
-const inlineFilters = reactive({ projectName: '', ownerUnit: '', projectType: null as string | null })
+const inlineFilters = reactive({ projectName: '', department: '', category: null as string | null })
 const searched = ref('')
 const exported = ref('')
 
@@ -107,7 +107,7 @@ const formLayout = computed(() => layout.value === 'vertical' ? 'vertical' : 'ho
   <div class="advanced" data-ui>
     <div class="advanced__head">
       <span class="tag">进阶用法</span>
-      <p>同一份字段契约在<b>多列 / 左右 / 垂直 / 行内</b>四种布局下复用，并演示多种插槽：单元格 <code>formSlot</code>（渲染函数与字符串插槽名）、静态投资上的前后缀 <code>beforeSlot</code>/<code>afterSlot</code>、区块 <code>slot</code>、容器 <code>header</code>/<code>footer</code>/<code>modelTitle</code>、查询区 <code>default</code> 追加按钮。切换下方布局试试。</p>
+      <p>同一份字段契约在<b>多列 / 左右 / 垂直 / 行内</b>四种布局下复用，并演示多种插槽：单元格 <code>formSlot</code>（渲染函数与字符串插槽名）、预算金额上的前后缀 <code>beforeSlot</code>/<code>afterSlot</code>、区块 <code>slot</code>、容器 <code>header</code>/<code>footer</code>/<code>modelTitle</code>、查询区 <code>default</code> 追加按钮。切换下方布局试试。</p>
     </div>
 
     <div class="switcher">

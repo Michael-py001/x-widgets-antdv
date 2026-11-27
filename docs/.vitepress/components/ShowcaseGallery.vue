@@ -12,8 +12,8 @@ const items = computed(() => [
   {
     img: withBase('/screenshots/real-case.webp'),
     href: link('/components/cases-advanced'),
-    zh: { tag: '真实案例', title: '查询 → 表格 → 弹窗复用同一份 Schema', desc: '项目管理双列查询、新增/编辑弹窗、测算行内入参，字段只声明一次。' },
-    en: { tag: 'Real cases', title: 'One schema across search, table, and modal', desc: 'Two-column project query, create/edit modal, and inline cost inputs — fields declared once.' },
+    zh: { tag: '真实案例', title: '查询 → 表格 → 弹窗复用同一份 Schema', desc: '双列查询、新增/编辑弹窗、行内入参，字段只声明一次。' },
+    en: { tag: 'Real cases', title: 'One schema across search, table, and modal', desc: 'Two-column query, create/edit modal, and inline inputs — fields declared once.' },
   },
   {
     img: withBase('/screenshots/advanced.webp'),

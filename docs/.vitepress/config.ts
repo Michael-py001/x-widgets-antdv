@@ -30,6 +30,19 @@ const base = env.VITEPRESS_BASE || '/'
 // 配置上下文里没有 withBase，手动拼接静态资源路径（base 形如 '/' 或 '/repo/'）。
 const asset = (path: string) => base.replace(/\/$/, '') + '/' + path
 
+const zhGuideSidebar = [
+  { text: '从这里开始', items: [
+    { text: '安装与配置', link: '/guide' },
+    { text: '姊妹库', link: '/sibling-library' },
+  ] },
+]
+const enGuideSidebar = [
+  { text: 'Start here', items: [
+    { text: 'Installation & setup', link: '/en/guide' },
+    { text: 'Sibling library', link: '/en/sibling-library' },
+  ] },
+]
+
 export default defineConfig({
   title: 'X Widgets · Ant Design Vue',
   description: '基于 Ant Design Vue 4 的 Vue 3 表单组件库，提供类型化 Schema 表单与业务组件。',
@@ -62,13 +75,13 @@ export default defineConfig({
         nav: [
           { text: '指南', link: '/guide' },
           { text: '组件', link: '/components/' },
+          { text: '姊妹库', link: '/sibling-library' },
           { text: 'AI 使用', link: '/ai' },
         ],
         search: { provider: 'local', options: { translations: zhSearchTranslations } },
         sidebar: {
-          '/guide': [
-            { text: '从这里开始', items: [{ text: '安装与配置', link: '/guide' }] },
-          ],
+          '/guide': zhGuideSidebar,
+          '/sibling-library': zhGuideSidebar,
           '/components': [
             { text: '基础', items: [
               { text: '导出的组件', link: '/components/' },
@@ -118,13 +131,13 @@ export default defineConfig({
         nav: [
           { text: 'Guide', link: '/en/guide' },
           { text: 'Components', link: '/en/components/' },
+          { text: 'Sibling library', link: '/en/sibling-library' },
           { text: 'AI usage', link: '/en/ai' },
         ],
         search: { provider: 'local' },
         sidebar: {
-          '/en/guide': [
-            { text: 'Start here', items: [{ text: 'Installation & setup', link: '/en/guide' }] },
-          ],
+          '/en/guide': enGuideSidebar,
+          '/en/sibling-library': enGuideSidebar,
           '/en/components': [
             { text: 'Basics', items: [
               { text: 'Exported components', link: '/en/components/' },

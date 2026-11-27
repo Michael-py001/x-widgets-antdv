@@ -14,8 +14,8 @@ import demoSource from './ControlGallery.vue?raw'
 import 'ant-design-vue/dist/reset.css'
 
 const formData = reactive<Record<string, any>>({
-  text: '', textarea: '', number: 1, select: null, radio: 'gas', checkbox: true,
-  checkboxGroup: ['estimate'], switchOn: true, date: '', range: [],
+  text: '', textarea: '', number: 1, select: null, radio: 'typeA', checkbox: true,
+  checkboxGroup: ['optionA'], switchOn: true, date: '', range: [],
   rate: 3, slider: 40, segmented: 'month', textReadonly: '由 textValue 展示，不写回模型',
 })
 
@@ -31,16 +31,16 @@ const model: FormModelBlock[] = [
   { title: '选择与开关', column: [
     { label: '下拉选择', name: 'select', type: 'select', colspan: 12,
       options: [
-        { label: '燃机', value: 'gas' }, { label: '输电', value: 'grid' }, { label: '海风', value: 'offshore' },
+        { label: '类型A', value: 'typeA' }, { label: '类型B', value: 'typeB' }, { label: '类型C', value: 'typeC' },
       ], props: { allowClear: true, placeholder: '请选择' } },
     { label: '单选', name: 'radio', type: 'radio-group', colspan: 12,
       options: [
-        { label: '燃机', value: 'gas' }, { label: '输电', value: 'grid' }, { label: '海风', value: 'offshore' },
+        { label: '类型A', value: 'typeA' }, { label: '类型B', value: 'typeB' }, { label: '类型C', value: 'typeC' },
       ] },
     { label: '多选框', name: 'checkbox', type: 'checkbox', colspan: 12 },
     { label: '复选框组', name: 'checkboxGroup', type: 'checkbox-group', colspan: 12,
       options: [
-        { label: '概算表', value: 'estimate' }, { label: '提资单', value: 'input' }, { label: '合同', value: 'contract' },
+        { label: '选项一', value: 'optionA' }, { label: '选项二', value: 'optionB' }, { label: '选项三', value: 'optionC' },
       ] },
     { label: '开关', name: 'switchOn', type: 'switch', colspan: 12 },
     { label: '分段控制', name: 'segmented', type: 'segmented', colspan: 24,

@@ -11,42 +11,42 @@ import 'ant-design-vue/dist/reset.css'
  * 字段不各自绑 v-model，而是把值写进同一个 formData。提交后驱动下方结果表。
  * 这是本包 Schema 桥接的核心：字段定义一次，查询与展示共用同一份契约。
  */
-const filters = reactive({ projectName: '', ownerUnit: '', projectType: null as string | null })
+const filters = reactive({ projectName: '', department: '', category: null as string | null })
 
 const columns: ColumnForFormItemType[] = [
   { name: 'projectName', label: '项目名称', el: 'input', colspan: 12,
     props: { allowClear: true, placeholder: '输入项目名称' } },
-  { name: 'ownerUnit', label: '业主单位', el: 'input', colspan: 12,
-    props: { allowClear: true, placeholder: '输入业主单位' } },
-  { name: 'projectType', label: '项目类型', el: 'select', colspan: 12,
+  { name: 'department', label: '所属单位', el: 'input', colspan: 12,
+    props: { allowClear: true, placeholder: '输入所属单位' } },
+  { name: 'category', label: '项目类型', el: 'select', colspan: 12,
     options: [
-      { label: '燃机', value: 'gas' },
-      { label: '输电', value: 'grid' },
-      { label: '海风', value: 'offshore' },
+      { label: '类型A', value: 'typeA' },
+      { label: '类型B', value: 'typeB' },
+      { label: '类型C', value: 'typeC' },
     ],
     props: { allowClear: true, placeholder: '全部类型' } },
 ]
 
 const records = [
-  { key: '1', projectName: '燃机造价分析', ownerUnit: '华东院', projectType: 'gas', stage: '已发布' },
-  { key: '2', projectName: '特高压线路评估', ownerUnit: '国网设计院', projectType: 'grid', stage: '草稿' },
-  { key: '3', projectName: '近海风电场测算', ownerUnit: '中广核', projectType: 'offshore', stage: '已发布' },
-  { key: '4', projectName: '燃机改扩建估算', ownerUnit: '华能', projectType: 'gas', stage: '已归档' },
+  { key: '1', projectName: '示例项目一', department: '示例单位甲', category: 'typeA', status: '已发布' },
+  { key: '2', projectName: '示例项目二', department: '示例单位乙', category: 'typeB', status: '草稿' },
+  { key: '3', projectName: '示例项目三', department: '示例单位丙', category: 'typeC', status: '已发布' },
+  { key: '4', projectName: '示例项目四', department: '示例单位丁', category: 'typeA', status: '已归档' },
 ]
 
 const resultColumns: TableProps['columns'] = [
   { title: '项目名称', dataIndex: 'projectName', key: 'projectName', width: 210 },
-  { title: '业主单位', dataIndex: 'ownerUnit', key: 'ownerUnit', width: 185 },
-  { title: '类型', dataIndex: 'projectType', key: 'projectType', width: 125 },
-  { title: '状态', dataIndex: 'stage', key: 'stage', width: 100 },
+  { title: '所属单位', dataIndex: 'department', key: 'department', width: 185 },
+  { title: '类型', dataIndex: 'category', key: 'category', width: 125 },
+  { title: '状态', dataIndex: 'status', key: 'status', width: 100 },
 ]
 
 const applied = ref({ ...filters })
 const runs = ref(1)
 const result = computed(() => records.filter((r) =>
   (!applied.value.projectName || r.projectName.includes(applied.value.projectName)) &&
-  (!applied.value.ownerUnit || r.ownerUnit.includes(applied.value.ownerUnit)) &&
-  (!applied.value.projectType || r.projectType === applied.value.projectType)
+  (!applied.value.department || r.department.includes(applied.value.department)) &&
+  (!applied.value.category || r.category === applied.value.category)
 ))
 
 function onSearch(values: typeof filters): void {
@@ -57,8 +57,8 @@ function onReset(values: typeof filters): void {
   applied.value = { ...values }
   runs.value += 1
 }
-function stageColor(stage: string): string {
-  return stage === '已发布' ? 'green' : stage === '草稿' ? 'blue' : 'default'
+function statusColor(status: string): string {
+  return status === '已发布' ? 'green' : status === '草稿' ? 'blue' : 'default'
 }
 </script>
 
@@ -83,8 +83,8 @@ function stageColor(stage: string): string {
         <span>{{ result.length }} 条 · 第 {{ runs }} 次查询</span>
       </div>
       <Table :columns="resultColumns" :data-source="result" :pagination="false" :auto-srcoll-height="false" :scroll="{ x: '100%' }" size="small">
-        <template #stage="{ text }">
-          <Tag :color="stageColor(text)">{{ text }}</Tag>
+        <template #status="{ text }">
+          <Tag :color="statusColor(text)">{{ text }}</Tag>
         </template>
       </Table>
     </div>
