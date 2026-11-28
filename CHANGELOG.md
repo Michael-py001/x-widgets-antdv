@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.5
+
+- Replaced business-specific names in documentation demos with generic names; added a sibling-library page recommending x-widgets-element-plus and refreshed screenshots.
+
 ## 0.1.4
 
 - Made demo tables fill their container, themed scrollbars with the site brand color, and changed the slider to use the theme blue.
